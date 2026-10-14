@@ -1,0 +1,20 @@
+# Java compiled output
+out/
+
+# React build output
+smartcityX-dashboard/dist/
+
+# Node modules (regenerated with npm install)
+smartcityX-dashboard/node_modules/
+
+# Vite cache
+smartcityX-dashboard/node_modules/.vite/
+smartcityX-dashboard/node_modules/.vite-temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.iml
