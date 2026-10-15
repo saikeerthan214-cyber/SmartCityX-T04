@@ -23,6 +23,9 @@ export default function Header({ page, onMenuClick, onSearch }: Props) {
     emergency:'Emergency Management', reports:'Citizen Reports', documents:'City Documents',
     iot:'IoT Sensors', resources:'Resource Allocation', dsa:'DSA Analytics',
     search:'Smart Search Engine', settings:'Settings',
+    flow:'Network Flow — M4 (CO4)',
+    npc:'NP-Completeness — M5 (CO5)',
+    randomized:'Randomized & Parallel — M6 (CO6)',
   };
 
   return (

@@ -58,12 +58,14 @@ export default function SmartSearch() {
       // 4. Map match results back to items
       const matched: any[] = [];
       if (algo === 'aho-corasick') {
-        // Group by textIndex
-        const grouped: Record<number, number> = {};
-        (emgResult.matches || []).forEach(m => { grouped[m.textIndex] = (grouped[m.textIndex] || 0) + 1; });
-        // For main search use matchDetails
-        (searchResult.matchDetails || []).forEach(md => {
-          matched.push({ ...allItems[md.textIndex], count: (md.positions?.length || 1) });
+        // AC returns matches[] with textIndex per keyword hit — group by textIndex
+        const countByIndex: Record<number, number> = {};
+        (searchResult.matches || []).forEach((m: any) => {
+          countByIndex[m.textIndex] = (countByIndex[m.textIndex] || 0) + 1;
+        });
+        Object.entries(countByIndex).forEach(([idx, count]) => {
+          const i = parseInt(idx);
+          if (allItems[i]) matched.push({ ...allItems[i], count });
         });
       } else {
         (searchResult.matchDetails || []).forEach(md => {
@@ -176,25 +178,7 @@ export default function SmartSearch() {
             ))}
           </div>
 
-          {/* Failure table for KMP */}
-          {algo === 'kmp' && stats.failureTable && stats.failureTable.length > 0 && (
-            <div style={{ marginBottom: 10 }}>
-              <div style={{ fontSize: 11, color: '#4b5563', fontWeight: 600, marginBottom: 6 }}>KMP FAILURE TABLE (built by Java)</div>
-              <div className="algo-highlight" style={{ fontSize: 12 }}>
-                Pattern:&nbsp;&nbsp; {query}&nbsp;&nbsp;<br />
-                Fail[ ]:&nbsp;&nbsp;&nbsp; [{stats.failureTable.join(', ')}]
-              </div>
-            </div>
-          )}
-
-          <div style={{ padding: '8px 12px', borderRadius: 6, background: 'rgba(56,189,248,0.06)', border: '1px solid rgba(56,189,248,0.1)' }}>
-            <div style={{ fontSize: 11, color: '#38bdf8', fontWeight: 600, marginBottom: 4 }}>WHY {stats.algorithm}?</div>
-            <div style={{ fontSize: 11, color: '#94a3b8', lineHeight: 1.7 }}>
-              {algo === 'kmp' && 'KMP preprocesses the pattern into a failure function O(M) — built by Java — then scans text once in O(N). Never backtracks more than N steps total.'}
-              {algo === 'rabin-karp' && `Rolling hash computed by Java. Hash slides across text in O(1) per step. Average O(N+M). Hash collisions handled by character verification. Detected ${stats.hashCollisions} collision(s).`}
-              {algo === 'aho-corasick' && 'Java builds a trie + BFS failure links for all patterns simultaneously. Scans text once O(N) detecting all keywords. Best for emergency multi-keyword detection.'}
-            </div>
-          </div>
+          {/* Failure table for KMP — removed */}
         </div>
       )}
 

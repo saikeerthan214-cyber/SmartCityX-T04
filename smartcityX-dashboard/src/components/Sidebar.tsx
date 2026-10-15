@@ -1,4 +1,4 @@
-import { LayoutDashboard, Car, Droplets, AlertTriangle, FileText, FolderOpen, Cpu, Boxes, BarChart3, Settings, Radio, Shield } from 'lucide-react';
+import { LayoutDashboard, Car, Droplets, AlertTriangle, FileText, FolderOpen, Cpu, Boxes, BarChart3, Settings, Radio, Shield, GitBranch, Binary, Shuffle } from 'lucide-react';
 
 const navItems = [
   { id:'dashboard',   label:'Dashboard',         icon:LayoutDashboard },
@@ -9,6 +9,9 @@ const navItems = [
   { id:'documents',   label:'Documents',          icon:FolderOpen },
   { id:'iot',         label:'IoT Sensors',        icon:Radio },
   { id:'resources',   label:'Resource Allocation',icon:Boxes },
+  { id:'flow',        label:'Network Flow',       icon:GitBranch },
+  { id:'npc',         label:'NP-Completeness',    icon:Binary },
+  { id:'randomized',  label:'Randomized & Parallel',icon:Shuffle },
   { id:'dsa',         label:'DSA Analytics',      icon:BarChart3 },
   { id:'search',      label:'Smart Search',       icon:Cpu },
 ];
