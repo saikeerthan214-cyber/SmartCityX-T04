@@ -2,722 +2,556 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SmartCityX – DSA Project Presentation</title>
+<title>SmartCityX – DSA Presentation</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',sans-serif;background:#0b1120;color:#f8fafc;overflow:hidden;height:100vh}
-
-  .slide{display:none;width:100vw;height:100vh;padding:60px 80px;flex-direction:column;justify-content:center;position:relative;animation:fadeIn 0.4s ease}
-  .slide.active{display:flex}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
-  /* Slide backgrounds */
-  .slide-1{background:linear-gradient(135deg,#0b1120 0%,#0d1f3c 100%)}
-  .slide-2,.slide-4,.slide-6,.slide-8,.slide-10,.slide-12,.slide-14{background:#0d1628}
-  .slide-3,.slide-5,.slide-7,.slide-9,.slide-11,.slide-13,.slide-15{background:#0b1120}
-
-  /* Top accent bar */
-  .slide::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#3b82f6,#38bdf8,#22c55e)}
-
-  /* Slide number */
-  .slide-num{position:absolute;bottom:24px;right:40px;font-size:12px;color:#4b5563;font-weight:600}
-
-  /* Navigation */
-  #nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:16px;padding:16px;background:rgba(11,17,32,0.95);border-top:1px solid rgba(255,255,255,0.06);z-index:100}
-  #nav button{padding:8px 24px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s}
-  #prev{background:rgba(255,255,255,0.06);color:#94a3b8}
-  #prev:hover{background:rgba(255,255,255,0.12)}
-  #next{background:linear-gradient(135deg,#3b82f6,#38bdf8);color:#fff}
-  #next:hover{opacity:0.9}
-  #counter{font-size:13px;color:#4b5563;min-width:60px;text-align:center}
-  .dot-row{display:flex;gap:6px;align-items:center}
-  .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.15);cursor:pointer;transition:all 0.2s}
-  .dot.active{background:#38bdf8;width:18px;border-radius:4px}
-
-  /* Typography */
-  .tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:16px}
-  .tag-blue{background:rgba(59,130,246,0.2);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)}
-  .tag-cyan{background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.25)}
-  .tag-green{background:rgba(34,197,94,0.15);color:#22c55e;border:1px solid rgba(34,197,94,0.25)}
-  .tag-orange{background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.25)}
-  .tag-red{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.25)}
-  .tag-purple{background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.25)}
-
-  h1{font-size:42px;font-weight:800;line-height:1.1;margin-bottom:12px}
-  h2{font-size:30px;font-weight:700;margin-bottom:8px}
-  h3{font-size:20px;font-weight:700;color:#38bdf8;margin-bottom:16px}
-  .sub{font-size:16px;color:#94a3b8;line-height:1.6}
-  .accent{color:#38bdf8}
-
-  /* Cards grid */
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
-  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px}
-  .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-top:24px}
-
-  .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px}
-  .card-blue{border-left:3px solid #3b82f6}
-  .card-cyan{border-left:3px solid #38bdf8}
-  .card-green{border-left:3px solid #22c55e}
-  .card-orange{border-left:3px solid #f59e0b}
-  .card-red{border-left:3px solid #ef4444}
-  .card-purple{border-left:3px solid #a78bfa}
-
-  .card-title{font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:8px}
-  .card-body{font-size:12px;color:#94a3b8;line-height:1.7}
-  .card-body b{color:#e2e8f0}
-
-  /* Bullet list */
-  ul.custom{list-style:none;margin-top:16px}
-  ul.custom li{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:14px;color:#94a3b8;line-height:1.6}
-  ul.custom li::before{content:'→';color:#38bdf8;font-weight:700;flex-shrink:0;margin-top:1px}
-  ul.custom li b{color:#e2e8f0}
-
-  /* Big stat */
-  .stat-row{display:flex;gap:20px;margin-top:24px;flex-wrap:wrap}
-  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px 28px;text-align:center}
-  .stat-val{font-size:36px;font-weight:800;color:#38bdf8}
-  .stat-label{font-size:12px;color:#4b5563;margin-top:4px;font-weight:600;letter-spacing:0.5px}
-
-  /* Algo badge */
-  .algo-badge{display:inline-block;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);border-radius:6px;padding:3px 10px;font-size:11px;color:#38bdf8;font-weight:600;font-family:monospace;margin:3px}
-
-  /* Flow diagram */
-  .flow{display:flex;align-items:center;gap:0;margin-top:24px;flex-wrap:wrap;justify-content:center}
-  .flow-box{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:10px;padding:14px 20px;text-align:center;font-size:13px;font-weight:600;color:#e2e8f0}
-  .flow-arrow{font-size:20px;color:#38bdf8;padding:0 8px}
-
-  /* Table */
-  table.styled{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
-  table.styled th{background:rgba(59,130,246,0.15);color:#60a5fa;padding:10px 14px;text-align:left;font-weight:600;letter-spacing:0.3px}
-  table.styled td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.05);color:#94a3b8}
-  table.styled tr:hover td{background:rgba(255,255,255,0.02)}
-  table.styled td:first-child{color:#e2e8f0;font-weight:600}
-  table.styled td.mono{font-family:monospace;color:#38bdf8}
-
-  /* Code block */
-  .code{background:#0b1520;border:1px solid rgba(56,189,248,0.15);border-radius:8px;padding:14px 18px;font-family:monospace;font-size:12px;color:#a5f3fc;line-height:1.8;margin-top:16px}
-  .code .kw{color:#38bdf8}
-  .code .cm{color:#4b5563}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0b1120;color:#f8fafc;overflow:hidden;height:100vh}
+.slide{display:none;width:100vw;height:100vh;padding:50px 72px 80px;flex-direction:column;justify-content:center;position:absolute;top:0;left:0;animation:fi .3s ease}
+.slide.active{display:flex}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.slide::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#3b82f6,#38bdf8,#22c55e)}
+.sn{position:absolute;bottom:22px;right:36px;font-size:12px;color:#4b5563;font-weight:600}
+#nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;padding:13px;background:rgba(11,17,32,.97);border-top:1px solid rgba(255,255,255,.06);z-index:100}
+#nav button{padding:7px 22px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer}
+#prev{background:rgba(255,255,255,.07);color:#94a3b8}
+#next{background:linear-gradient(135deg,#3b82f6,#38bdf8);color:#fff}
+#ctr{font-size:12px;color:#4b5563;min-width:55px;text-align:center}
+.dots{display:flex;gap:5px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .2s}
+.dot.active{background:#38bdf8;width:16px;border-radius:3px}
+.tag{display:inline-block;padding:3px 11px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.8px;margin-bottom:14px}
+.tb{background:rgba(59,130,246,.18);color:#60a5fa;border:1px solid rgba(59,130,246,.3)}
+.tc{background:rgba(56,189,248,.13);color:#38bdf8;border:1px solid rgba(56,189,248,.25)}
+.tg{background:rgba(34,197,94,.13);color:#22c55e;border:1px solid rgba(34,197,94,.25)}
+.to{background:rgba(245,158,11,.13);color:#f59e0b;border:1px solid rgba(245,158,11,.25)}
+.tr{background:rgba(239,68,68,.13);color:#ef4444;border:1px solid rgba(239,68,68,.25)}
+.tp{background:rgba(139,92,246,.13);color:#a78bfa;border:1px solid rgba(139,92,246,.25)}
+h1{font-size:44px;font-weight:800;line-height:1.05;margin-bottom:10px}
+h2{font-size:28px;font-weight:700;margin-bottom:6px}
+.ac{color:#38bdf8}
+.sub{font-size:14px;color:#94a3b8;line-height:1.65}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px}
+.cb{border-left:3px solid #3b82f6}.cc{border-left:3px solid #38bdf8}
+.cg{border-left:3px solid #22c55e}.co{border-left:3px solid #f59e0b}
+.cr{border-left:3px solid #ef4444}.cp{border-left:3px solid #a78bfa}
+.ct{font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:7px}
+.cd{font-size:11.5px;color:#94a3b8;line-height:1.7}
+.cd b{color:#e2e8f0}
+.stats{display:flex;gap:16px;margin-top:22px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 24px;text-align:center}
+.sv{font-size:32px;font-weight:800;color:#38bdf8}
+.sl{font-size:10px;color:#4b5563;margin-top:4px;font-weight:600;letter-spacing:.4px}
+.flow{display:flex;align-items:center;margin-top:24px;justify-content:center;flex-wrap:wrap}
+.fb{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:10px;padding:11px 16px;text-align:center;font-size:12px;font-weight:600;color:#e2e8f0}
+.fa{font-size:18px;color:#38bdf8;padding:0 8px}
+.code{background:#0b1520;border:1px solid rgba(56,189,248,.15);border-radius:8px;padding:11px 14px;font-family:monospace;font-size:11px;color:#a5f3fc;line-height:1.8;margin-top:10px}
+.ab{display:inline-block;background:rgba(56,189,248,.09);border:1px solid rgba(56,189,248,.2);border-radius:5px;padding:2px 8px;font-size:10px;color:#38bdf8;font-weight:600;font-family:monospace;margin:2px}
+table.t{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
+table.t th{background:rgba(59,130,246,.14);color:#60a5fa;padding:8px 12px;text-align:left;font-weight:600;font-size:11px}
+table.t td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:#94a3b8}
+table.t td:first-child{color:#e2e8f0;font-weight:600}
+table.t td.mono{font-family:monospace;color:#38bdf8;font-size:11px}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
+.bb{background:rgba(59,130,246,.15);color:#60a5fa}
+.bc{background:rgba(56,189,248,.12);color:#38bdf8}
+.bg{background:rgba(34,197,94,.12);color:#22c55e}
+.bo{background:rgba(245,158,11,.12);color:#f59e0b}
+.br{background:rgba(239,68,68,.12);color:#ef4444}
+.bp{background:rgba(139,92,246,.12);color:#a78bfa}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 1 — TITLE
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-1 active">
-  <div class="tag tag-cyan">DSA PROJECT — REVIEW 1</div>
-  <h1>Smart<span class="accent">CityX</span></h1>
-  <h2 style="color:#94a3b8;font-weight:400;font-size:22px;margin-bottom:32px">Integrated Smart-City Analytics Platform</h2>
-  <div class="stat-row">
-    <div class="stat"><div class="stat-val">13</div><div class="stat-label">DSA ALGORITHMS</div></div>
-    <div class="stat"><div class="stat-val">3</div><div class="stat-label">MODULES</div></div>
-    <div class="stat"><div class="stat-val">10</div><div class="stat-label">CITY SERVICES</div></div>
-    <div class="stat"><div class="stat-val">Java</div><div class="stat-label">DSA ENGINE</div></div>
+<!-- SLIDE 1: TITLE -->
+<div class="slide active" style="background:linear-gradient(135deg,#0b1120,#0d1f3c)">
+  <div class="tag tc">DSA PROJECT — TEAM T-04</div>
+  <h1>Smart<span class="ac">CityX</span></h1>
+  <h2 style="color:#94a3b8;font-weight:400;font-size:20px;margin-bottom:26px">Integrated Smart-City Analytics Platform</h2>
+  <div class="stats">
+    <div class="stat"><div class="sv">23</div><div class="sl">DSA ALGORITHMS</div></div>
+    <div class="stat"><div class="sv">6</div><div class="sl">MODULES CO1–CO6</div></div>
+    <div class="stat"><div class="sv">10</div><div class="sl">DASHBOARD PAGES</div></div>
+    <div class="stat"><div class="sv" style="color:#22c55e">Java</div><div class="sl">DSA ENGINE</div></div>
+    <div class="stat"><div class="sv" style="color:#f59e0b">React</div><div class="sl">FRONTEND</div></div>
   </div>
-  <div style="margin-top:36px;font-size:14px;color:#4b5563">Team T-04 &nbsp;|&nbsp; CO1 – CO3 &nbsp;|&nbsp; Modules 1 – 3</div>
-  <div class="slide-num">1 / 15</div>
+  <div style="margin-top:26px;font-size:13px;color:#4b5563">Team T-04 &nbsp;|&nbsp; DSA Project</div>
+  <div class="sn">1 / 14</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 2 — WHAT IS SmartCityX
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-2">
-  <div class="tag tag-blue">PROBLEM STATEMENT</div>
-  <h2>What is <span class="accent">SmartCityX</span>?</h2>
-  <p class="sub" style="margin-top:8px;max-width:800px">A modern smart-city management platform that uses <b style="color:#e2e8f0">Data Structures and Algorithms</b> as the core engine to process, search, and optimize city data in real time.</p>
-  <div class="grid2" style="margin-top:28px">
-    <div class="card card-cyan">
-      <div class="card-title">🏙️ What it Manages</div>
-      <div class="card-body">
-        • Citizen complaints &amp; service requests<br/>
-        • Emergency incidents (fire, flood, accidents)<br/>
-        • Traffic, water &amp; energy monitoring<br/>
-        • City infrastructure documents<br/>
-        • 20+ real-time IoT sensors
+<!-- SLIDE 2: PROBLEM -->
+<div class="slide" style="background:#0d1628">
+  <div class="tag tr">PROBLEM STATEMENT</div>
+  <h2>Why <span class="ac">SmartCityX</span>?</h2>
+  <p class="sub" style="margin-top:8px;max-width:780px">Cities generate thousands of reports, sensor readings, and emergency alerts every minute. Manual processing is impossible — DSA algorithms handle this at scale.</p>
+  <div class="g2">
+    <div class="card cr">
+      <div class="ct">🏙️ What the City Needs</div>
+      <div class="cd">
+        • Fast search across <b>30+ citizen reports</b> and documents<br/>
+        • Auto-correct misspelled service queries<br/>
+        • Detect emergency keywords instantly in alert streams<br/>
+        • Optimally allocate resources within budget<br/>
+        • Find critical infrastructure bottlenecks<br/>
+        • Process IoT sensor data in real time
       </div>
     </div>
-    <div class="card card-blue">
-      <div class="card-title">🎯 Why it Matters</div>
-      <div class="card-body">
-        Cities generate massive amounts of data every second. Manual processing is impossible. DSA algorithms enable:<br/><br/>
-        • <b>Fast search</b> across thousands of reports<br/>
-        • <b>Auto-correction</b> of citizen queries<br/>
-        • <b>Optimal resource</b> deployment<br/>
-        • <b>Emergency detection</b> in real time
+    <div class="card cb">
+      <div class="ct">⚡ How DSA Solves It</div>
+      <div class="cd">
+        • <b>KMP / Aho-Corasick</b> → Search 45 records in O(N+M)<br/>
+        • <b>Damerau-Levenshtein</b> → Correct typos in O(N×M)<br/>
+        • <b>Bitmask DP</b> → Optimal allocation in O(2^N)<br/>
+        • <b>Suffix Array + LCP</b> → Document similarity O(N log N)<br/>
+        • <b>Ford-Fulkerson</b> → Max flow + bottlenecks O(V·E²)<br/>
+        • <b>SAT / Vertex Cover</b> → NP-hard planning problems
       </div>
     </div>
   </div>
-  <div class="slide-num">2 / 15</div>
+  <div class="sn">2 / 14</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 3 — SYSTEM ARCHITECTURE
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-3">
-  <div class="tag tag-cyan">ARCHITECTURE</div>
-  <h2>How the System <span class="accent">Works</span></h2>
-  <div class="flow" style="margin-top:40px">
-    <div class="flow-box">👤<br/>Citizen<br/><span style="font-size:11px;color:#4b5563">User Input</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-box" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.08)">🌐<br/>React Dashboard<br/><span style="font-size:11px;color:#4b5563">Port 5173</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-box" style="border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.08)">☕<br/>Java DSA Engine<br/><span style="font-size:11px;color:#4b5563">Port 6789</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-box" style="border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.08)">📊<br/>DSA Result<br/><span style="font-size:11px;color:#4b5563">JSON Response</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-box">📱<br/>Dashboard<br/><span style="font-size:11px;color:#4b5563">Displays Output</span></div>
+<!-- SLIDE 3: ARCHITECTURE -->
+<div class="slide" style="background:#0b1120">
+  <div class="tag tc">SYSTEM ARCHITECTURE</div>
+  <h2>How <span class="ac">SmartCityX</span> Works</h2>
+  <div class="flow">
+    <div class="fb">👤<br/>Citizen<br/><span style="font-size:10px;color:#4b5563">User Input</span></div>
+    <div class="fa">→</div>
+    <div class="fb" style="border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.07)">🌐<br/>React Dashboard<br/><span style="font-size:10px;color:#4b5563">Port 5173</span></div>
+    <div class="fa">→</div>
+    <div class="fb" style="border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07)">☕<br/>Java DSA Engine<br/><span style="font-size:10px;color:#4b5563">Port 6789</span></div>
+    <div class="fa">→</div>
+    <div class="fb" style="border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07)">📊<br/>DSA Result<br/><span style="font-size:10px;color:#4b5563">JSON</span></div>
+    <div class="fa">→</div>
+    <div class="fb">📱<br/>Dashboard<br/><span style="font-size:10px;color:#4b5563">Display</span></div>
   </div>
-  <div class="grid2" style="margin-top:28px">
-    <div class="card card-red">
-      <div class="card-title">☕ Java Backend — DSA Engine</div>
-      <div class="card-body">
-        <b>module1/</b> — String Algorithms<br/>
-        <b>module2/</b> — Suffix Structures<br/>
-        <b>module3/</b> — Advanced DP<br/><br/>
-        REST API: /api/search, /api/autocorrect,<br/>
-        /api/resources, /api/similarity
+  <div class="g2" style="margin-top:18px">
+    <div class="card cr">
+      <div class="ct">☕ Java Backend — 9 REST API Endpoints</div>
+      <div class="cd">
+        <b>module1/</b> KMP, Z-Function, Rabin-Karp, Aho-Corasick<br/>
+        <b>module2/</b> SuffixArray, SA-IS, LCP/Kasai, SuffixAutomaton<br/>
+        <b>module3/</b> EditDistance, BitmaskDP, MatrixChain, SubsetDP<br/>
+        <b>module4/</b> FordFulkerson, Dinic's, BipartiteMatching<br/>
+        <b>module5/</b> SATSolver, NPReductions, VertexCover<br/>
+        <b>module6/</b> QuickSort, Reservoir, MillerRabin, Blelloch
       </div>
     </div>
-    <div class="card card-cyan">
-      <div class="card-title">🌐 React Frontend — Dashboard</div>
-      <div class="card-body">
-        10 pages: Dashboard, Traffic, Water/Energy,<br/>
-        Emergency, Reports, Documents, IoT,<br/>
-        Resources, DSA Analytics, Smart Search<br/><br/>
-        Calls Java API → displays results
+    <div class="card cc">
+      <div class="ct">🌐 React Frontend — 10 Dashboard Pages</div>
+      <div class="cd">
+        Dashboard · Traffic · Water &amp; Energy · Emergency<br/>
+        Citizen Reports · Documents · IoT Sensors<br/>
+        Resource Allocation · Network Flow<br/>
+        NP-Completeness · Randomized &amp; Parallel · Smart Search<br/><br/>
+        All DSA calls go to Java — React only displays results
       </div>
     </div>
   </div>
-  <div class="slide-num">3 / 15</div>
+  <div class="sn">3 / 14</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 4 — MODULE 1 OVERVIEW
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-4">
-  <div class="tag tag-blue">MODULE 1 — CO1</div>
-  <h2>String <span class="accent">Algorithms</span></h2>
-  <p class="sub">Pattern matching algorithms that power the city's search and alert detection systems.</p>
-  <div class="grid2" style="margin-top:24px">
-    <div class="card card-blue">
-      <div class="card-title">🔍 KMP — Knuth-Morris-Pratt</div>
-      <div class="card-body">
-        <b>City Use:</b> Smart Search — searches citizen reports and documents<br/><br/>
-        Builds a <b>failure function</b> to avoid re-checking characters.<br/>
-        Never backtracks more than N steps.<br/><br/>
-        <span class="algo-badge">Time: O(N+M)</span><span class="algo-badge">Space: O(M)</span>
+<!-- SLIDE 4: MODULE 1 -->
+<div class="slide" style="background:#0d1628">
+  <div class="tag tb">MODULE 1 — String Algorithms — Smart Search Page</div>
+  <h2>How String Algorithms Power <span class="ac">City Search</span></h2>
+  <div class="g2">
+    <div class="card cb">
+      <div class="ct">🔍 KMP — Citizen Report Search</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.7">
+        <b style="color:#38bdf8">Input:</b> User types "water leakage" in Smart Search<br/>
+        <b style="color:#38bdf8">Java runs:</b> KMP on 30 reports + 15 documents<br/>
+        <b style="color:#22c55e">Output:</b> Found in CR-1042, CR-1057, CR-1067<br/>
+        <b style="color:#22c55e">Stats:</b> 2,847 comparisons · 0.003 ms
+      </div>
+      <div class="code">Text:    "Water leakage near Sector 12 pipeline..."<br/>Pattern: "water leakage"<br/>Match at: position [0] in CR-1042<br/>Match at: position [12] in CR-1057</div>
+    </div>
+    <div class="card cr">
+      <div class="ct">🚨 Aho-Corasick — Emergency Detection</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.7">
+        <b style="color:#38bdf8">Input:</b> Citizen submits report: "fire near metro, gas leak detected, ambulance needed"<br/>
+        <b style="color:#38bdf8">Java runs:</b> Aho-Corasick with 16 emergency keywords<br/>
+        <b style="color:#22c55e">Output:</b> 3 keywords detected, Emergency Level: CRITICAL
+      </div>
+      <div class="code">FIRE      detected at position 0<br/>GAS LEAK  detected at position 17<br/>AMBULANCE detected at position 38<br/>→ Emergency Level: CRITICAL<br/>→ Dispatch response team immediately</div>
+    </div>
+    <div class="card cc">
+      <div class="ct">🎯 Rabin-Karp — Infrastructure Code Lookup</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.7">
+        <b style="color:#38bdf8">Input:</b> Search infrastructure log for "INF-2024-WATER"<br/>
+        <b style="color:#22c55e">Output:</b> Found at positions [0, 29, 58] · 0 hash collisions
+      </div>
+      <div class="code">Log: "INF-2024-WATER INF-2024-ROAD INF-2024-WATER"<br/>Code: "INF-2024-WATER"<br/>Found at: [0, 29]  |  Hash collisions: 0</div>
+    </div>
+    <div class="card co">
+      <div class="ct">🔁 Z-Function — Repeated Issue Detection</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.7">
+        <b style="color:#38bdf8">Input:</b> City report with recurring phrase<br/>
+        <b style="color:#22c55e">Output:</b> "pipe burst" repeated 3 times detected
+      </div>
+      <div class="code">Report: "pipe burst pipe burst water leak pipe burst"<br/>Pattern: "pipe burst"<br/>Found 3 times at positions: [0, 11, 33]</div>
+    </div>
+  </div>
+  <div class="sn">4 / 14</div>
+</div>
+
+<!-- SLIDE 5: MODULE 2 OVERVIEW -->
+<div class="slide" style="background:#0b1120">
+  <div class="tag tp">MODULE 2 — Suffix Structures — Documents Page</div>
+  <h2>How Suffix Structures Power <span class="ac">Document Analysis</span></h2>
+  <div class="g2">
+    <div class="card cp">
+      <div class="ct">📑 Suffix Array + LCP/Kasai — Document Similarity</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.7">
+        <b style="color:#38bdf8">Input:</b> Select INF-2031 (Road Maintenance Sector 12) and INF-2034 (Road Maintenance Sector 14)<br/>
+        <b style="color:#38bdf8">Java runs:</b> Suffix Array O(N log N) + Kasai LCP O(N)<br/>
+        <b style="color:#22c55e">Output:</b> 53% similarity · LCS found
+      </div>
+      <div class="code">Doc A: "road maintenance sector 12 water pipeline repair"<br/>Doc B: "road maintenance sector 14 overpass structural"<br/><br/>LCS: "road maintenance sector " (24 chars)<br/>Similarity Score: 53%<br/>Execution time: 1.02 ms (Java backend)</div>
+    </div>
+    <div class="card cb">
+      <div class="ct">🤖 Suffix Automaton — Substring Query</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.7">
+        <b style="color:#38bdf8">Input:</b> Query "water pipeline" against INF-2032 (Water Pipeline Blueprint)<br/>
+        <b style="color:#38bdf8">Java runs:</b> Suffix Automaton built in O(N)<br/>
+        <b style="color:#22c55e">Output:</b> FOUND — instant O(M) query
+      </div>
+      <div class="code">Document: "water pipeline network zone A blueprint..."<br/>Query:    "water pipeline"  →  FOUND in document<br/>Query:    "gas pipeline"    →  NOT FOUND<br/>Distinct substrings indexed: 2,020</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;padding:11px 16px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);font-size:12px;color:#94a3b8;border-radius:8px">
+    <b style="color:#a78bfa">Why useful for SmartCityX:</b> City generates 100s of documents. SA+LCP detects duplicate/related documents instantly. Avoids creating the same maintenance plan twice. Finds conflicting instructions across departments.
+  </div>
+  <div class="sn">5 / 14</div>
+</div>
+
+<!-- SLIDE 6: MODULE 2 DEEP DIVE -->
+<div class="slide" style="background:#0d1628">
+  <div class="tag tp">MODULE 2 — Deep Dive — Documents Page</div>
+  <h2>Suffix Array + LCP — <span class="ac">Real City Document Example</span></h2>
+  <div class="g2">
+    <div class="card cp">
+      <div class="ct">Step-by-step: INF-2031 vs INF-2034</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:8px;line-height:1.9">
+        <b style="color:#38bdf8">① Concatenate:</b> "road maintenance sector 12..." + § + "road maintenance sector 14..."<br/>
+        <b style="color:#a78bfa">② Suffix Array:</b> Sort all suffixes — "road m..." appears near top in both<br/>
+        <b style="color:#f59e0b">③ Kasai LCP:</b> LCP[i] = common prefix length between adjacent suffixes<br/>
+        <b style="color:#22c55e">④ Cross-doc scan:</b> Find pair where one suffix from DocA, other from DocB<br/>
+        <b style="color:#ef4444">⑤ Score:</b> 2 × 24 / (52 + 49) × 100 = 47%
+      </div>
+      <div class="code">SA built in O(N log N) on combined string<br/>LCP built in O(N) via Kasai's algorithm<br/><br/>Cross-document LCS: "road maintenance sector "<br/>Length: 24 characters<br/>Similarity: 47% — Highly related documents</div>
+    </div>
+    <div class="card cc">
+      <div class="ct">What This Tells the City</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:8px;line-height:1.8">
+        <b style="color:#22c55e">High similarity (>70%):</b><br/>
+        &nbsp;&nbsp;→ Same department, can reuse plan<br/>
+        &nbsp;&nbsp;→ Avoids duplicate maintenance orders<br/><br/>
+        <b style="color:#f59e0b">Medium similarity (40-70%):</b><br/>
+        &nbsp;&nbsp;→ Related topics, check for conflicts<br/>
+        &nbsp;&nbsp;→ May need coordination between teams<br/><br/>
+        <b style="color:#ef4444">Low similarity (&lt;40%):</b><br/>
+        &nbsp;&nbsp;→ Different city services, independent
+      </div>
+      <div class="code">Example from dashboard:<br/>INF-2031 (Road M. Sector 12) vs INF-2032 (Water Pipeline Zone A)<br/>LCS: "water pipeline maintenance " → 28 chars<br/>Score: 31% → Low — Different services<br/><br/>INF-2031 vs INF-2034 (Road M. Sector 14)<br/>Score: 47% → Medium — Same type, different sector</div>
+    </div>
+  </div>
+  <div class="sn">6 / 14</div>
+</div>
+
+<!-- SLIDE 7: MODULE 3 DEEP DIVE -->
+<div class="slide" style="background:#0b1120">
+  <div class="tag tg">MODULE 3 — Deep Dive — Resource Allocation + Smart Search</div>
+  <h2>DP Algorithms — <span class="ac">Real City Examples</span></h2>
+  <div class="g2">
+    <div class="card cg">
+      <div class="ct">⚡ Bitmask DP — Budget ₹80,000 optimization</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.8">
+        <b style="color:#38bdf8">Input:</b> 8 city resources, budget = ₹80,000<br/>
+        <b style="color:#38bdf8">Java evaluates:</b> 2^8 = 256 resource combinations<br/>
+        <b style="color:#22c55e">Best found:</b> Ambulance + Police + Rescue + Electric = ₹64,000, value=322
+      </div>
+      <div class="code">mask=10001101 → {Ambulance, Police, Rescue, Electric}<br/>Total Cost:  ₹64,000  ≤  Budget ₹80,000  ✓<br/>Total Value: 322 pts (Coverage: 78%)<br/>Combinations evaluated: 256<br/><br/>Greedy would pick HazMat (val=88, cost=30,000)<br/>then miss better combination → DP wins</div>
+    </div>
+    <div class="card co">
+      <div class="ct">✏️ Damerau-Levenshtein — Citizen Query Correction</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.8">
+        <b style="color:#38bdf8">Input:</b> Citizen types "watter leakege sector 12"<br/>
+        <b style="color:#38bdf8">Java runs:</b> Damerau-Levenshtein on each word<br/>
+        <b style="color:#22c55e">Output:</b> "water leakage sector 12" (edit dist=2)
+      </div>
+      <div class="code">watter  → water   (delete one 't', dist=1)<br/>leakege → leakage (insert 'a', dist=1)<br/>sector  → sector  (no change)<br/>12      → 12      (no change)<br/><br/>Corrected: "water leakage sector 12"<br/>Total edit distance: 2</div>
+    </div>
+  </div>
+  <div class="sn">7 / 14</div>
+</div>
+
+<!-- SLIDE 8: MODULE 3 OVERVIEW -->
+<div class="slide" style="background:#0d1628">
+  <div class="tag tg">MODULE 3 — Advanced DP — All 4 Algorithms in SmartCityX</div>
+  <h2>DP Powers <span class="ac">4 City Features</span></h2>
+  <div class="g2">
+    <div class="card co">
+      <div class="ct">✏️ Levenshtein / Damerau-Levenshtein → Smart Search Autocorrect</div>
+      <div class="cd">
+        <b>Dashboard Page:</b> Smart Search<br/>
+        <b>Input:</b> "emrgency watter supply"<br/>
+        <b>Java Output:</b> "emergency water supply" — edit distance 2<br/>
+        Results auto-shown for corrected query
       </div>
     </div>
-    <div class="card card-cyan">
-      <div class="card-title">🎯 Rabin-Karp</div>
-      <div class="card-body">
-        <b>City Use:</b> Infrastructure code search — finds IDs like INF-2024-WATER<br/><br/>
-        Uses <b>rolling hash</b> — updates hash in O(1) per step.<br/>
-        Average case same as KMP but handles multiple patterns.<br/><br/>
-        <span class="algo-badge">Time: O(N+M) avg</span><span class="algo-badge">Space: O(1)</span>
+    <div class="card cg">
+      <div class="ct">⚡ Bitmask DP → Resource Allocation Page</div>
+      <div class="cd">
+        <b>Dashboard Page:</b> Resource Allocation<br/>
+        <b>Input:</b> Budget slider ₹80,000 + 8 city resources<br/>
+        <b>Java Output:</b> Best 4 resources, ₹64,000 spent, 78% coverage<br/>
+        256 combinations evaluated and shown
       </div>
     </div>
-    <div class="card card-red">
-      <div class="card-title">🚨 Aho-Corasick</div>
-      <div class="card-body">
-        <b>City Use:</b> Emergency detection — scans text for fire, flood, gas leak, accident <b>simultaneously</b><br/><br/>
-        Builds a <b>trie + BFS failure links</b>. Scans text once detecting all keywords.<br/><br/>
-        <span class="algo-badge">Time: O(N+M+Z)</span><span class="algo-badge">Space: O(M×Σ)</span>
+    <div class="card cb">
+      <div class="ct">🔗 Matrix-Chain DP → City Analytics Pipeline</div>
+      <div class="cd">
+        <b>Dashboard Page:</b> DSA Analytics (console demo)<br/>
+        <b>Input:</b> 4 analytics ops: Ingest(40×20) → Aggregate → Filter → ML<br/>
+        <b>Java Output:</b> Optimal order saves 46% computation<br/>
+        Naive: 48,000 ops → Optimal: 26,000 ops
       </div>
     </div>
-    <div class="card card-orange">
-      <div class="card-title">🔁 Z-Function</div>
-      <div class="card-body">
-        <b>City Use:</b> Detect repeated phrases in city reports (e.g., "pipe burst" repeated 3 times)<br/><br/>
-        Computes Z-array where Z[i] = length of longest prefix starting at i.<br/><br/>
-        <span class="algo-badge">Time: O(N+M)</span><span class="algo-badge">Space: O(N+M)</span>
+    <div class="card cp">
+      <div class="ct">📡 Subset/SOS DP → IoT Zone Aggregation</div>
+      <div class="cd">
+        <b>Dashboard Page:</b> Randomized &amp; Parallel / Console Demo<br/>
+        <b>Input:</b> Alert scores per zone combination<br/>
+        <b>Java Output:</b> dp[ZoneA+B+C] = 28 (sum over all 8 subsets)<br/>
+        Aggregates sensor data efficiently across city zones
       </div>
     </div>
   </div>
-  <div class="slide-num">4 / 15</div>
+  <div class="sn">8 / 14</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 5 — KMP DEEP DIVE
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-5">
-  <div class="tag tag-blue">KMP — DEEP DIVE</div>
-  <h2>KMP in <span class="accent">SmartCityX</span></h2>
-  <div class="grid2" style="margin-top:20px">
+<!-- SLIDE 9: MODULE 4 -->
+<div class="slide" style="background:#0b1120">
+  <div class="tag tc">MODULE 4 — Network Flow — Network Flow Page</div>
+  <h2>Ford-Fulkerson Powers <span class="ac">City Infrastructure</span></h2>
+  <div class="g2">
+    <div class="card cb">
+      <div class="ct">💧 Water Distribution — Real Example</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.8">
+        <b style="color:#38bdf8">Input:</b> Select "Water Distribution Network" on dashboard<br/>
+        <b style="color:#38bdf8">Java runs:</b> Ford-Fulkerson BFS on 6-node water network<br/>
+        <b style="color:#22c55e">Output:</b> Max flow = 19 KL/hr to Zone C
+      </div>
+      <div class="code">Reservoir→PumpA(cap=15), Reservoir→PumpB(cap=12)<br/>PumpA→ZoneA(10), PumpA→ZoneB(8)<br/>PumpB→ZoneB(7),  PumpB→ZoneC(10)<br/><br/>Java Ford-Fulkerson result:<br/>Maximum water flow to Zone C: 19 KL/hr<br/><br/>Min-Cut (bottleneck): PumpB→ZoneC (cap=10)<br/>→ This pipe is critical — must not fail</div>
+    </div>
+    <div class="card cc">
+      <div class="ct">4 City Networks on Dashboard</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.8">
+        <b style="color:#38bdf8">💧 Water:</b> Reservoir → Pumps → City Zones<br/>
+        Max flow = max water deliverable to Zone C<br/><br/>
+        <b style="color:#f59e0b">⚡ Energy:</b> Power Plant → Substations → City Load<br/>
+        Max flow = max MW deliverable to city<br/><br/>
+        <b style="color:#22c55e">🚗 Traffic:</b> Highway Hub → Junctions → City Center<br/>
+        Max flow = peak vehicle capacity<br/><br/>
+        <b style="color:#ef4444">🚨 Emergency:</b> Dispatch → Routes → Incident Zones<br/>
+        Max flow = max resources reachable
+      </div>
+      <div class="code">Min-Cut = Critical bottleneck edges (shown in RED)<br/>Max-Flow Theorem: Max flow = Min-Cut capacity<br/>→ City knows which pipes/cables to prioritize</div>
+    </div>
+  </div>
+  <div class="sn">9 / 14</div>
+</div>
+
+<!-- SLIDE 10: MODULE 5 -->
+<div class="slide" style="background:#0d1628">
+  <div class="tag to">MODULE 5 — NP-Completeness — NP-Completeness Page</div>
+  <h2>SAT &amp; Vertex Cover for <span class="ac">City Planning</span></h2>
+  <div class="g2">
+    <div class="card cr">
+      <div class="ct">🔒 SAT Solver — City Constraint Check</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.8">
+        <b style="color:#38bdf8">Input:</b> 5 city services + 5 planning constraints<br/>
+        <b style="color:#38bdf8">Java runs:</b> DPLL backtracking solver<br/>
+        <b style="color:#22c55e">Output:</b> SATISFIABLE — city plan is feasible
+      </div>
+      <div class="code">Variables: RoadA_Open, WaterMain, EmergRoute, PowerGrid, TrafficSig<br/><br/>Constraint: RoadA OR WaterMain OR EmergRoute (at least one active)<br/>Constraint: NOT RoadA OR PowerGrid OR TrafficSig<br/>... 5 constraints total<br/><br/>RESULT: SATISFIABLE<br/>RoadA_Open    = TRUE  (Active)<br/>WaterMain     = TRUE  (Active)<br/>EmergRoute    = FALSE (Inactive)<br/>PowerGrid     = TRUE  (Active)<br/>TrafficSig    = FALSE (Inactive)</div>
+    </div>
+    <div class="card co">
+      <div class="ct">🔧 Vertex Cover — Critical Infrastructure</div>
+      <div style="font-size:11.5px;color:#94a3b8;margin-top:6px;line-height:1.8">
+        <b style="color:#38bdf8">Input:</b> 8 city infrastructure nodes, 10 connections<br/>
+        <b style="color:#38bdf8">Java runs:</b> 2-Approximation Vertex Cover<br/>
+        <b style="color:#22c55e">Output:</b> 4 critical nodes cover all 10 connections
+      </div>
+      <div class="code">Nodes: CentralHub, PumpStation, Substation, Junction4,<br/>       TrafficNode, WaterTower, FireStation, Hospital<br/><br/>2-Approximation Result:<br/>Critical nodes: {PumpStation, Junction4, WaterTower, FireStation}<br/>Coverage: ALL 10 connections covered ✓<br/>Guarantee: result ≤ 2 × optimal<br/><br/>→ Monitor/maintain these 4 nodes = entire network covered</div>
+    </div>
+  </div>
+  <div class="sn">10 / 14</div>
+</div>
+
+<!-- SLIDE 11: MODULE 6 -->
+<div class="slide" style="background:#0b1120">
+  <div class="tag tg">MODULE 6 — Randomized &amp; Parallel — Randomized Page</div>
+  <h2>Randomized Algorithms for <span class="ac">IoT &amp; City Analytics</span></h2>
+  <div class="g2">
     <div>
-      <h3>How it Works</h3>
-      <ul class="custom" style="margin-top:8px">
-        <li><b>Step 1:</b> Build failure function from pattern in O(M)</li>
-        <li><b>Step 2:</b> Scan text left to right — never move text pointer back</li>
-        <li><b>Step 3:</b> On mismatch, use failure table to skip ahead</li>
-        <li><b>Step 4:</b> Report all match positions</li>
-      </ul>
-      <div class="code">
-        <span class="cm">// Pattern: "water" in citizen report</span><br/>
-        Text:    "emergency <span class="kw">water</span> leak zone-A"<br/>
-        Fail[]:  [0, 0, 0, 0, 0]<br/>
-        Match at position: 10<br/>
-        Comparisons: 31 (vs 150 for naive)
-      </div>
-    </div>
-    <div>
-      <h3>City Application</h3>
-      <div class="card card-blue" style="margin-bottom:14px">
-        <div class="card-title">Smart Search Page</div>
-        <div class="card-body">User types "water leakage" → Java KMP searches all 30 reports + 15 documents → returns match positions + failure table</div>
-      </div>
-      <div class="card card-cyan">
-        <div class="card-title">Why KMP over Naive?</div>
-        <div class="card-body">
-          Naive: O(N×M) — rescans characters<br/>
-          KMP: O(N+M) — failure function prevents backtracking<br/><br/>
-          For 30 reports × avg 200 chars: <b>KMP saves ~80% comparisons</b>
+      <div class="card cb" style="margin-bottom:12px">
+        <div class="ct">🔀 Randomized QuickSort — Service Request Ranking</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:5px;line-height:1.7">
+          <b style="color:#38bdf8">Input:</b> 15 service request priority scores<br/>
+          <b style="color:#22c55e">Output:</b> Top 3 critical: 99, 92, 88
         </div>
+        <div class="code" style="font-size:10px">Before: [45,92,13,78,56,31,88,24,67,99,42,15,73,60,37]<br/>After:  [13,15,24,31,37,42,45,56,60,67,73,78,88,92,99]<br/>Top critical requests: 99, 92, 88</div>
       </div>
-    </div>
-  </div>
-  <div class="slide-num">5 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 6 — AHO-CORASICK DEEP DIVE
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-6">
-  <div class="tag tag-red">AHO-CORASICK — DEEP DIVE</div>
-  <h2>Aho-Corasick in <span class="accent">SmartCityX</span></h2>
-  <div class="grid2" style="margin-top:20px">
-    <div>
-      <h3>Construction</h3>
-      <ul class="custom" style="margin-top:8px">
-        <li><b>Step 1:</b> Insert all emergency keywords into a Trie</li>
-        <li><b>Step 2:</b> Build failure links using BFS (like KMP but for trie)</li>
-        <li><b>Step 3:</b> Build output links — propagate matches</li>
-        <li><b>Step 4:</b> Scan city text once — detect all keywords simultaneously</li>
-      </ul>
-      <div class="card card-red" style="margin-top:16px">
-        <div class="card-title">Emergency Keywords (16 patterns)</div>
-        <div class="card-body">
-          fire · flood · accident · gas leak · explosion · injured · ambulance · emergency · danger · critical · blackout · collapse · leak · smoke · trapped · casualties
+      <div class="card cc">
+        <div class="ct">📡 Reservoir Sampling — IoT Stream</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:5px;line-height:1.7">
+          <b style="color:#38bdf8">Input:</b> 500 continuous temperature sensor readings<br/>
+          <b style="color:#22c55e">Output:</b> 10 uniform samples — each with 2% probability
         </div>
+        <div class="code" style="font-size:10px">Stream: 500 IoT readings (20°C–99°C)<br/>Sample: [67, 43, 89, 52, 71, 38, 95, 44, 63, 78]<br/>Each reading had equal 10/500 = 2% probability ✓</div>
       </div>
     </div>
     <div>
-      <h3>City Application — Two Places</h3>
-      <div class="card card-orange" style="margin-bottom:14px">
-        <div class="card-title">1. Emergency Scanner</div>
-        <div class="card-body">User pastes any text → Java scans once → all matching keywords highlighted with position → Emergency Level: CRITICAL / HIGH / MEDIUM</div>
+      <div class="card cp" style="margin-bottom:12px">
+        <div class="ct">🔢 Miller-Rabin — Sensor ID Verification</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:5px;line-height:1.7"><b style="color:#38bdf8">Input:</b> City device IDs (large numbers)<br/><b style="color:#22c55e">Output:</b> Valid (prime) or Invalid (composite)</div>
+        <div class="code" style="font-size:10px">104729  → PRIME  → Valid sensor ID ✓<br/>104730  → COMPOSITE → Reject this ID ✗<br/>999983  → PRIME  → Valid device ID ✓<br/>15485863 → PRIME → Valid gateway ID ✓</div>
       </div>
-      <div class="card card-purple">
-        <div class="card-title">2. Report Category Detection</div>
-        <div class="card-body">Citizen submits report → Java Aho-Corasick scans description → auto-assigns category (Water / Traffic / Emergency / Infrastructure)</div>
-      </div>
-      <div style="margin-top:12px">
-        <span class="algo-badge">Time: O(N + M + Z)</span>
-        <span class="algo-badge">Z = number of matches</span>
-        <span class="algo-badge">Single scan for all patterns</span>
+      <div class="card co">
+        <div class="ct">📊 Blelloch Scan — Cumulative Zone Energy</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:5px;line-height:1.7"><b style="color:#38bdf8">Input:</b> Energy load per zone<br/><b style="color:#22c55e">Output:</b> Cumulative load — detects overload point</div>
+        <div class="code" style="font-size:10px">Zone: A    B    C    D    E    F    G    H<br/>Load: 120  85  200   95  140  175   60  110<br/>Cum:  120 205  405  500  640  815  875  985<br/>→ Zone F cumulative 815MW — approaching limit ⚠</div>
       </div>
     </div>
   </div>
-  <div class="slide-num">6 / 15</div>
+  <div class="sn">11 / 14</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 7 — MODULE 2 OVERVIEW
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-7">
-  <div class="tag tag-purple">MODULE 2 — CO2</div>
-  <h2>Suffix <span class="accent">Structures</span></h2>
-  <p class="sub">Document indexing and similarity algorithms for city infrastructure documents.</p>
-  <div class="grid2" style="margin-top:24px">
-    <div class="card card-purple">
-      <div class="card-title">📑 Suffix Array (O(N log N))</div>
-      <div class="card-body">
-        <b>City Use:</b> Index city documents for fast substring search<br/><br/>
-        Sorts all suffixes of a document lexicographically. Binary search finds any pattern in O(M log N).<br/><br/>
-        <span class="algo-badge">Build: O(N log N)</span><span class="algo-badge">Search: O(M log N)</span>
-      </div>
-    </div>
-    <div class="card card-blue">
-      <div class="card-title">⚡ SA-IS (O(N))</div>
-      <div class="card-body">
-        <b>City Use:</b> Large-scale document indexing where O(N log N) is too slow<br/><br/>
-        Linear time suffix array using Induced Sorting. Classifies suffixes as S-type or L-type.<br/><br/>
-        <span class="algo-badge">Build: O(N)</span><span class="algo-badge">Space: O(N)</span>
-      </div>
-    </div>
-    <div class="card card-cyan">
-      <div class="card-title">📊 LCP / Kasai Algorithm</div>
-      <div class="card-body">
-        <b>City Use:</b> Document similarity — finds Longest Common Substring between two city documents<br/><br/>
-        Kasai builds LCP array in O(N) after suffix array. LCP[i] = common prefix length between adjacent suffixes.<br/><br/>
-        <span class="algo-badge">Build: O(N)</span><span class="algo-badge">Space: O(N)</span>
-      </div>
-    </div>
-    <div class="card card-green">
-      <div class="card-title">🤖 Suffix Automaton</div>
-      <div class="card-body">
-        <b>City Use:</b> Fast substring existence queries — "does this pattern appear in this document?"<br/><br/>
-        Builds a DAG of all substrings in O(N). Query any substring in O(M).<br/><br/>
-        <span class="algo-badge">Build: O(N)</span><span class="algo-badge">Query: O(M)</span>
-      </div>
-    </div>
-  </div>
-  <div class="slide-num">7 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 8 — SUFFIX ARRAY + LCP APPLICATION
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-8">
-  <div class="tag tag-purple">SUFFIX ARRAY + LCP — DEEP DIVE</div>
-  <h2>Document <span class="accent">Similarity</span> in SmartCityX</h2>
-  <div class="grid2" style="margin-top:20px">
+<!-- SLIDE 12: INPUT OUTPUT -->
+<div class="slide" style="background:#0d1628">
+  <div class="tag tb">INPUT &amp; OUTPUT</div>
+  <h2>Data &amp; <span class="ac">Results</span></h2>
+  <div class="g2">
     <div>
-      <h3>Algorithm Steps (Java)</h3>
-      <ul class="custom" style="margin-top:8px">
-        <li><b>Step 1:</b> Concatenate docA + separator + docB</li>
-        <li><b>Step 2:</b> Build Suffix Array on combined string in O(N log N)</li>
-        <li><b>Step 3:</b> Run Kasai's algorithm → LCP array in O(N)</li>
-        <li><b>Step 4:</b> Scan adjacent suffix pairs where one is from docA, other from docB</li>
-        <li><b>Step 5:</b> Maximum such LCP = Longest Common Substring</li>
-        <li><b>Step 6:</b> Similarity score = (2 × LCS length) / (len_A + len_B) × 100%</li>
-      </ul>
-    </div>
-    <div>
-      <h3>City Application</h3>
-      <div class="card card-purple" style="margin-bottom:12px">
-        <div class="card-title">Documents Page — Live Demo</div>
-        <div class="card-body">
-          Doc A: "road maintenance sector 12 water pipeline"<br/>
-          Doc B: "road maintenance water supply repair"<br/><br/>
-          → LCS: <b>"road maintenance "</b> (17 chars)<br/>
-          → Similarity: <b>31%</b><br/>
-          → Java execution: <b>1.02 ms</b>
-        </div>
-      </div>
-      <div class="card card-blue">
-        <div class="card-title">Why useful for a city?</div>
-        <div class="card-body">Detects duplicate reports, finds related infrastructure documents, identifies common service descriptions across departments</div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-num">8 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 9 — MODULE 3 OVERVIEW
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-9">
-  <div class="tag tag-green">MODULE 3 — CO3</div>
-  <h2>Advanced Dynamic <span class="accent">Programming</span></h2>
-  <p class="sub">Optimization algorithms for city resource management, query correction, and analytics.</p>
-  <div class="grid2" style="margin-top:20px">
-    <div class="card card-orange">
-      <div class="card-title">✏️ Levenshtein Distance</div>
-      <div class="card-body">
-        <b>City Use:</b> Autocorrect citizen search queries<br/><br/>
-        Minimum edits (insert/delete/replace) to transform one string to another. Wagner-Fischer DP table.<br/><br/>
-        <span class="algo-badge">O(N×M) time</span><span class="algo-badge">O(N×M) space</span>
-      </div>
-    </div>
-    <div class="card card-red">
-      <div class="card-title">🔀 Damerau-Levenshtein</div>
-      <div class="card-body">
-        <b>City Use:</b> Better autocorrect — also handles transpositions (e.g. "serivce" → "service")<br/><br/>
-        Adds transposition operation to Levenshtein. Catches adjacent character swaps.<br/><br/>
-        <span class="algo-badge">O(N×M) time</span><span class="algo-badge">O(N×M) space</span>
-      </div>
-    </div>
-    <div class="card card-green">
-      <div class="card-title">⚡ Bitmask DP</div>
-      <div class="card-body">
-        <b>City Use:</b> Optimal city resource allocation within a budget<br/><br/>
-        Evaluates all 2^N subsets of resources. Each bit = one resource included/excluded.<br/><br/>
-        <span class="algo-badge">O(2^N × N) time</span><span class="algo-badge">O(2^N) space</span>
-      </div>
-    </div>
-    <div class="card card-blue">
-      <div class="card-title">🔗 Matrix-Chain DP</div>
-      <div class="card-body">
-        <b>City Use:</b> Optimize city analytics pipeline operation order<br/><br/>
-        Finds optimal parenthesization to minimize total multiplications. O(N³) DP.<br/><br/>
-        <span class="algo-badge">O(N³) time</span><span class="algo-badge">O(N²) space</span>
-      </div>
-    </div>
-  </div>
-  <div class="slide-num">9 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 10 — BITMASK DP DEEP DIVE
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-10">
-  <div class="tag tag-green">BITMASK DP — DEEP DIVE</div>
-  <h2>Resource <span class="accent">Optimization</span> in SmartCityX</h2>
-  <div class="grid2" style="margin-top:20px">
-    <div>
-      <h3>How it Works</h3>
-      <ul class="custom" style="margin-top:8px">
-        <li><b>N resources</b> → 2^N possible subsets (combinations)</li>
-        <li>Each subset represented as a <b>binary bitmask</b> (0/1 per resource)</li>
-        <li>Iterate all 2^N masks — compute total cost and value</li>
-        <li>Track mask with max value where cost ≤ budget</li>
-      </ul>
-      <div class="code">
-        <span class="cm">// N=8 resources → 256 combinations</span><br/>
-        mask = 00000101 → Fire Truck + Ambulance<br/>
-        cost = 25000+20000 = 45000 ≤ budget ✓<br/>
-        value = 90+95 = 185 pts → <span class="kw">best so far</span>
-      </div>
-    </div>
-    <div>
-      <h3>City Application</h3>
-      <div class="card card-green" style="margin-bottom:12px">
-        <div class="card-title">Resource Allocation Page</div>
-        <div class="card-body">
-          8 city resources: Fire Truck, Ambulance, Police, Rescue Team, Water Tanker, Repair Crew, HazMat, Electric Unit<br/><br/>
-          User sets budget (e.g. ₹80,000) → Java evaluates <b>256 combinations</b> → returns optimal set with coverage score
-        </div>
-      </div>
-      <div class="card card-blue">
-        <div class="card-title">Why Bitmask DP?</div>
-        <div class="card-body">
-          Greedy fails — highest value resource might exceed budget. DP guarantees the global optimum by checking all 2^N subsets systematically.
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-num">10 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 11 — EDIT DISTANCE DEEP DIVE
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-11">
-  <div class="tag tag-orange">EDIT DISTANCE — DEEP DIVE</div>
-  <h2>Query <span class="accent">Autocorrection</span> in SmartCityX</h2>
-  <div class="grid2" style="margin-top:20px">
-    <div>
-      <h3>Levenshtein DP Table</h3>
-      <div class="card card-orange" style="margin-top:8px">
-        <div class="card-title">Example: "watter" → "water"</div>
-        <div class="card-body" style="font-family:monospace;font-size:12px">
-          &nbsp;&nbsp;&nbsp; &nbsp; w &nbsp;a &nbsp;t &nbsp;e &nbsp;r<br/>
-          &nbsp;&nbsp; [0, 1, 2, 3, 4, 5]<br/>
-          w&nbsp; [1, 0, 1, 2, 3, 4]<br/>
-          a&nbsp; [2, 1, 0, 1, 2, 3]<br/>
-          t&nbsp; [3, 2, 1, 0, 1, 2]<br/>
-          t&nbsp; [4, 3, 2, 1, 1, 2]<br/>
-          e&nbsp; [5, 4, 3, 2, 1, 2]<br/>
-          r&nbsp; [6, 5, 4, 3, 2, <span class="kw">1</span>]<br/><br/>
-          Edit Distance = <b>1</b> (one extra 't')
-        </div>
-      </div>
-    </div>
-    <div>
-      <h3>City Application</h3>
-      <ul class="custom" style="margin-top:8px">
-        <li><b>"watter leakege"</b> → Java → "water leakage" (dist=2)</li>
-        <li><b>"emrgency"</b> → Java → "emergency" (dist=1)</li>
-        <li><b>"trafic"</b> → Java → "traffic" (dist=1)</li>
-        <li><b>"infastructure"</b> → Java → "infrastructure" (dist=1)</li>
-        <li><b>"serivce"</b> → Damerau-Lev → "service" (dist=1, transposition)</li>
-      </ul>
-      <div class="card card-red" style="margin-top:16px">
-        <div class="card-title">Damerau vs Levenshtein</div>
-        <div class="card-body">
-          Levenshtein: "serivce" → distance = 2<br/>
-          Damerau-Levenshtein: "serivce" → distance = 1<br/><br/>
-          Damerau adds <b>transposition</b> (swap adjacent chars) as a single operation
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-num">11 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 12 — DSA MAPPING TABLE
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-12">
-  <div class="tag tag-cyan">DSA → CITY MAPPING</div>
-  <h2>Algorithm to <span class="accent">City Feature</span> Mapping</h2>
-  <table class="styled" style="margin-top:20px">
-    <tr><th>Algorithm</th><th>Module</th><th>Time</th><th>City Feature</th><th>User Interaction</th></tr>
-    <tr><td>KMP</td><td>M1</td><td class="mono">O(N+M)</td><td>Smart Search — single keyword</td><td>Type in search box</td></tr>
-    <tr><td>Rabin-Karp</td><td>M1</td><td class="mono">O(N+M) avg</td><td>Infrastructure code search</td><td>Search by ID</td></tr>
-    <tr><td>Aho-Corasick</td><td>M1</td><td class="mono">O(N+M+Z)</td><td>Emergency detection, Report categorization</td><td>Submit report / Scan text</td></tr>
-    <tr><td>Z-Function</td><td>M1</td><td class="mono">O(N+M)</td><td>Repeated pattern detection in reports</td><td>Console demo</td></tr>
-    <tr><td>Suffix Array</td><td>M2</td><td class="mono">O(N log N)</td><td>Document similarity analysis</td><td>Select 2 documents</td></tr>
-    <tr><td>LCP / Kasai</td><td>M2</td><td class="mono">O(N)</td><td>Longest Common Substring</td><td>Documents page</td></tr>
-    <tr><td>Levenshtein</td><td>M3</td><td class="mono">O(N×M)</td><td>Search query correction</td><td>Type misspelled query</td></tr>
-    <tr><td>Bitmask DP</td><td>M3</td><td class="mono">O(2^N × N)</td><td>Resource allocation optimization</td><td>Set budget, click Optimize</td></tr>
-  </table>
-  <div class="slide-num">12 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 13 — USER INTERACTIONS
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-13">
-  <div class="tag tag-green">USER ROLE</div>
-  <h2>What the <span class="accent">User</span> Does</h2>
-  <div class="grid2" style="margin-top:24px">
-    <div class="card card-blue">
-      <div class="card-title">🔍 Smart Search Page</div>
-      <div class="card-body">
-        1. User types a keyword (e.g. "water leakage")<br/>
-        2. Selects algorithm: KMP / Rabin-Karp / Aho-Corasick<br/>
-        3. Java runs selected algorithm<br/>
-        4. Returns: match positions, failure table, comparisons, exec time<br/>
-        5. Misspelled? Java auto-corrects with Damerau-Levenshtein
-      </div>
-    </div>
-    <div class="card card-red">
-      <div class="card-title">🚨 Emergency Scanner</div>
-      <div class="card-body">
-        1. User opens Emergency page<br/>
-        2. Clicks "Open Scanner"<br/>
-        3. Pastes any text (news, alert message)<br/>
-        4. Java Aho-Corasick scans for 16 emergency keywords<br/>
-        5. Returns detected keywords + positions + emergency level
-      </div>
-    </div>
-    <div class="card card-orange">
-      <div class="card-title">📋 Submit Citizen Report</div>
-      <div class="card-body">
-        1. User fills name, location, issue, description<br/>
-        2. Clicks "Submit &amp; Auto-Detect Category"<br/>
-        3. Java Aho-Corasick scans description<br/>
-        4. Auto-assigns: Water / Traffic / Emergency / Infrastructure<br/>
-        5. Report appears at top of the list instantly
-      </div>
-    </div>
-    <div class="card card-purple">
-      <div class="card-title">📄 Document Similarity</div>
-      <div class="card-body">
-        1. User selects Document A and Document B<br/>
-        2. Clicks "Run Similarity Analysis"<br/>
-        3. Java builds Suffix Array + LCP<br/>
-        4. Returns similarity %, LCS string, execution time<br/>
-        5. Useful for detecting duplicate or related documents
-      </div>
-    </div>
-  </div>
-  <div class="slide-num">13 / 15</div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 14 — COMPLEXITY SUMMARY
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-14">
-  <div class="tag tag-cyan">COMPLEXITY ANALYSIS</div>
-  <h2>All 13 Algorithms — <span class="accent">Complexity Summary</span></h2>
-  <div class="grid2" style="margin-top:16px;gap:12px">
-    <div>
-      <table class="styled">
-        <tr><th>Algorithm</th><th>Time</th><th>Space</th></tr>
-        <tr><td>KMP</td><td class="mono">O(N+M)</td><td class="mono">O(M)</td></tr>
-        <tr><td>Z-Function</td><td class="mono">O(N+M)</td><td class="mono">O(N+M)</td></tr>
-        <tr><td>Rabin-Karp</td><td class="mono">O(N+M) avg</td><td class="mono">O(1)</td></tr>
-        <tr><td>Aho-Corasick</td><td class="mono">O(N+M+Z)</td><td class="mono">O(M×Σ)</td></tr>
-        <tr><td>Suffix Array</td><td class="mono">O(N log N)</td><td class="mono">O(N)</td></tr>
-        <tr><td>SA-IS</td><td class="mono">O(N)</td><td class="mono">O(N)</td></tr>
+      <div style="font-size:13px;font-weight:700;color:#38bdf8;margin-bottom:4px">Input Dataset</div>
+      <table class="t">
+        <tr><th>File</th><th>Records</th><th>Contents</th></tr>
+        <tr><td>reports.ts</td><td class="mono">30</td><td>Citizen reports — location, category, description</td></tr>
+        <tr><td>documents.ts</td><td class="mono">15</td><td>Infrastructure docs with full text content</td></tr>
+        <tr><td>sensors.ts</td><td class="mono">20</td><td>IoT sensors — temp, pressure, energy, traffic</td></tr>
+        <tr><td>emergencies.ts</td><td class="mono">15</td><td>Active emergencies — type, team, status</td></tr>
+        <tr><td>resources.ts</td><td class="mono">8</td><td>City resources — cost and service value</td></tr>
       </table>
+      <div style="margin-top:8px;font-size:11px;color:#4b5563">+ 24h traffic, water, energy time-series charts</div>
     </div>
     <div>
-      <table class="styled">
-        <tr><th>Algorithm</th><th>Time</th><th>Space</th></tr>
-        <tr><td>LCP / Kasai</td><td class="mono">O(N)</td><td class="mono">O(N)</td></tr>
-        <tr><td>Suffix Automaton</td><td class="mono">O(N)</td><td class="mono">O(N)</td></tr>
-        <tr><td>Levenshtein</td><td class="mono">O(N×M)</td><td class="mono">O(N×M)</td></tr>
-        <tr><td>Damerau-Lev</td><td class="mono">O(N×M)</td><td class="mono">O(N×M)</td></tr>
-        <tr><td>Bitmask DP</td><td class="mono">O(2^N × N)</td><td class="mono">O(2^N)</td></tr>
-        <tr><td>Matrix-Chain</td><td class="mono">O(N³)</td><td class="mono">O(N²)</td></tr>
-        <tr><td>Subset / SOS DP</td><td class="mono">O(N × 2^N)</td><td class="mono">O(2^N)</td></tr>
+      <div style="font-size:13px;font-weight:700;color:#38bdf8;margin-bottom:4px">Output per Algorithm</div>
+      <table class="t">
+        <tr><th>Algorithm</th><th>Output</th></tr>
+        <tr><td>KMP / Rabin-Karp</td><td>Match positions, comparisons count</td></tr>
+        <tr><td>Aho-Corasick</td><td>Keywords found + emergency level</td></tr>
+        <tr><td>Suffix Array+LCP</td><td>Similarity %, LCS string, exec time</td></tr>
+        <tr><td>Damerau-Lev</td><td>Corrected query, edit distance</td></tr>
+        <tr><td>Bitmask DP</td><td>Optimal resources, coverage score</td></tr>
+        <tr><td>Ford-Fulkerson</td><td>Max flow value, min-cut edges</td></tr>
+        <tr><td>SAT / DPLL</td><td>SATISFIABLE + variable assignment</td></tr>
+        <tr><td>Vertex Cover</td><td>Critical nodes, 2-approx guarantee</td></tr>
       </table>
     </div>
   </div>
-  <div class="slide-num">14 / 15</div>
+  <div class="sn">12 / 14</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     SLIDE 15 — CONCLUSION
-═══════════════════════════════════════════════════════════ -->
-<div class="slide slide-15">
-  <div class="tag tag-green">CONCLUSION</div>
-  <h2>SmartCityX — <span class="accent">Key Takeaways</span></h2>
-  <div class="grid3" style="margin-top:24px">
-    <div class="card card-blue">
-      <div class="card-title">✅ DSA Integration</div>
-      <div class="card-body">13 algorithms across 3 modules. Each algorithm directly powers a real city feature — not a standalone demo.</div>
-    </div>
-    <div class="card card-cyan">
-      <div class="card-title">✅ Java Backend</div>
-      <div class="card-body">All DSA runs in Java. React frontend calls Java via REST API. Faculty can run Main.java for console demo too.</div>
-    </div>
-    <div class="card card-green">
-      <div class="card-title">✅ Real Interaction</div>
-      <div class="card-body">User submits reports, scans text, searches data, optimizes resources — Java processes every action.</div>
-    </div>
-    <div class="card card-orange">
-      <div class="card-title">📌 Module 1 — CO1</div>
-      <div class="card-body">KMP, Rabin-Karp, Aho-Corasick, Z-Function for city-wide search and emergency detection.</div>
-    </div>
-    <div class="card card-purple">
-      <div class="card-title">📌 Module 2 — CO2</div>
-      <div class="card-body">Suffix Array, SA-IS, LCP/Kasai, Suffix Automaton for document indexing and similarity.</div>
-    </div>
-    <div class="card card-red">
-      <div class="card-title">📌 Module 3 — CO3</div>
-      <div class="card-body">Levenshtein, Bitmask DP, Matrix-Chain, Subset DP for query correction and optimization.</div>
-    </div>
+<!-- SLIDE 13: COMPLEXITY -->
+<div class="slide" style="background:#0b1120">
+  <div class="tag tc">COMPLEXITY SUMMARY</div>
+  <h2>All <span class="ac">23 Algorithms</span> — Time &amp; Space</h2>
+  <div class="g2" style="margin-top:12px">
+    <table class="t">
+      <tr><th>Algorithm</th><th>Mod</th><th>Time</th><th>Space</th></tr>
+      <tr><td>KMP</td><td><span class="badge bb">M1</span></td><td class="mono">O(N+M)</td><td class="mono">O(M)</td></tr>
+      <tr><td>Z-Function</td><td><span class="badge bb">M1</span></td><td class="mono">O(N+M)</td><td class="mono">O(N+M)</td></tr>
+      <tr><td>Rabin-Karp</td><td><span class="badge bb">M1</span></td><td class="mono">O(N+M) avg</td><td class="mono">O(1)</td></tr>
+      <tr><td>Aho-Corasick</td><td><span class="badge bb">M1</span></td><td class="mono">O(N+M+Z)</td><td class="mono">O(M·Σ)</td></tr>
+      <tr><td>Suffix Array</td><td><span class="badge bp">M2</span></td><td class="mono">O(N log N)</td><td class="mono">O(N)</td></tr>
+      <tr><td>SA-IS</td><td><span class="badge bp">M2</span></td><td class="mono">O(N)</td><td class="mono">O(N)</td></tr>
+      <tr><td>LCP / Kasai</td><td><span class="badge bp">M2</span></td><td class="mono">O(N)</td><td class="mono">O(N)</td></tr>
+      <tr><td>Suffix Automaton</td><td><span class="badge bp">M2</span></td><td class="mono">O(N)</td><td class="mono">O(N)</td></tr>
+      <tr><td>Levenshtein</td><td><span class="badge bg">M3</span></td><td class="mono">O(N×M)</td><td class="mono">O(N×M)</td></tr>
+      <tr><td>Bitmask DP</td><td><span class="badge bg">M3</span></td><td class="mono">O(2^N × N)</td><td class="mono">O(2^N)</td></tr>
+      <tr><td>Matrix-Chain</td><td><span class="badge bg">M3</span></td><td class="mono">O(N³)</td><td class="mono">O(N²)</td></tr>
+    </table>
+    <table class="t">
+      <tr><th>Algorithm</th><th>Mod</th><th>Time</th><th>Space</th></tr>
+      <tr><td>Subset / SOS DP</td><td><span class="badge bg">M3</span></td><td class="mono">O(N × 2^N)</td><td class="mono">O(2^N)</td></tr>
+      <tr><td>Ford-Fulkerson</td><td><span class="badge bc">M4</span></td><td class="mono">O(V·E²)</td><td class="mono">O(V+E)</td></tr>
+      <tr><td>Dinic's</td><td><span class="badge bc">M4</span></td><td class="mono">O(V²·E)</td><td class="mono">O(V+E)</td></tr>
+      <tr><td>Bipartite Match</td><td><span class="badge bc">M4</span></td><td class="mono">O(E√V)</td><td class="mono">O(V+E)</td></tr>
+      <tr><td>SAT / 3-SAT</td><td><span class="badge bo">M5</span></td><td class="mono">O(2^N)</td><td class="mono">O(N·M)</td></tr>
+      <tr><td>Vertex Cover</td><td><span class="badge bo">M5</span></td><td class="mono">O(V+E)</td><td class="mono">O(V+E)</td></tr>
+      <tr><td>Rand. QuickSort</td><td><span class="badge br">M6</span></td><td class="mono">O(N log N) exp</td><td class="mono">O(log N)</td></tr>
+      <tr><td>Reservoir Sample</td><td><span class="badge br">M6</span></td><td class="mono">O(N)</td><td class="mono">O(K)</td></tr>
+      <tr><td>Miller-Rabin</td><td><span class="badge br">M6</span></td><td class="mono">O(k log² N)</td><td class="mono">O(1)</td></tr>
+      <tr><td>Parallel Reduce</td><td><span class="badge br">M6</span></td><td class="mono">O(N/P+log P)</td><td class="mono">O(N)</td></tr>
+      <tr><td>Blelloch Scan</td><td><span class="badge br">M6</span></td><td class="mono">O(log N)</td><td class="mono">O(N)</td></tr>
+    </table>
   </div>
-  <div style="margin-top:28px;text-align:center;color:#4b5563;font-size:13px">
-    SmartCityX &nbsp;|&nbsp; Team T-04 &nbsp;|&nbsp; Java DSA Engine + React Dashboard &nbsp;|&nbsp; Review-1
-  </div>
-  <div class="slide-num">15 / 15</div>
+  <div class="sn">13 / 14</div>
 </div>
 
-<!-- Navigation -->
+<!-- SLIDE 14: CONCLUSION -->
+<div class="slide" style="background:linear-gradient(135deg,#0b1120,#0d1f3c)">
+  <div class="tag tg">CONCLUSION</div>
+  <h2>SmartCityX — <span class="ac">Key Takeaways</span></h2>
+  <div class="g3" style="margin-top:18px">
+    <div class="card cb"><div class="ct">✅ All 6 Modules</div><div class="cd">23 algorithms across CO1–CO6, each powering a real city feature — not just a demo.</div></div>
+    <div class="card cc"><div class="ct">✅ Java DSA Backend</div><div class="cd">All algorithms run in Java via REST API. React only displays. Run Main.java or Demo.java independently.</div></div>
+    <div class="card cg"><div class="ct">✅ Real User Interaction</div><div class="cd">Users search, submit reports, scan emergency text, optimize resources — Java processes every action.</div></div>
+    <div class="card co"><div class="ct">📌 M1 + M2 String + Suffix</div><div class="cd">KMP, Aho-Corasick power search. Suffix Array + LCP finds document similarity and LCS.</div></div>
+    <div class="card cp"><div class="ct">📌 M3 Advanced DP</div><div class="cd">Bitmask DP optimizes resources. Levenshtein corrects queries. Matrix-Chain optimizes pipelines.</div></div>
+    <div class="card cr"><div class="ct">📌 M4 + M5 + M6</div><div class="cd">Network flow for city infrastructure. NP-hard city planning with approximation. Randomized IoT analytics.</div></div>
+  </div>
+  <div style="margin-top:18px;text-align:center;color:#4b5563;font-size:12px">SmartCityX &nbsp;|&nbsp; Team T-04 &nbsp;|&nbsp; Java + React &nbsp;|&nbsp; CO1–CO6 &nbsp;|&nbsp; 23 Algorithms</div>
+  <div class="sn">14 / 14</div>
+</div>
+
+<!-- NAV -->
 <div id="nav">
-  <button id="prev" onclick="changeSlide(-1)">← Prev</button>
-  <div class="dot-row" id="dots"></div>
-  <span id="counter">1 / 15</span>
-  <button id="next" onclick="changeSlide(1)">Next →</button>
+  <button id="prev" onclick="go(-1)">← Prev</button>
+  <div class="dots" id="dots"></div>
+  <span id="ctr">1 / 14</span>
+  <button id="next" onclick="go(1)">Next →</button>
 </div>
 
 <script>
-  const total = 15;
-  let current = 1;
-
-  // Build dots
+  const N = 14;
+  let cur = 1;
+  const slides = document.querySelectorAll('.slide');
   const dotsEl = document.getElementById('dots');
-  for (let i = 1; i <= total; i++) {
+  for (let i = 1; i <= N; i++) {
     const d = document.createElement('div');
     d.className = 'dot' + (i === 1 ? ' active' : '');
     d.onclick = () => goTo(i);
     dotsEl.appendChild(d);
   }
-
+  const dots = document.querySelectorAll('.dot');
   function goTo(n) {
-    document.querySelector('.slide.active').classList.remove('active');
-    document.querySelectorAll('.dot')[current - 1].classList.remove('active');
-    current = Math.max(1, Math.min(total, n));
-    document.querySelector('.slide-' + current).classList.add('active');
-    document.querySelectorAll('.dot')[current - 1].classList.add('active');
-    document.getElementById('counter').textContent = current + ' / ' + total;
-    document.getElementById('prev').disabled = current === 1;
-    document.getElementById('next').textContent = current === total ? 'Finish' : 'Next →';
+    slides[cur - 1].classList.remove('active');
+    dots[cur - 1].classList.remove('active');
+    cur = Math.max(1, Math.min(N, n));
+    slides[cur - 1].classList.add('active');
+    dots[cur - 1].classList.add('active');
+    document.getElementById('ctr').textContent = cur + ' / ' + N;
+    document.getElementById('next').textContent = cur === N ? 'Finish' : 'Next →';
   }
-
-  function changeSlide(dir) { goTo(current + dir); }
-
+  function go(d) { goTo(cur + d); }
   document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
   });
 </script>
 </body>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>SmartCityX – Real-Time Algorithm Output Report</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293b;padding:36px;max-width:1080px;margin:0 auto}
+h1{font-size:26px;font-weight:800;color:#0f172a;margin-bottom:4px}
+.subtitle{font-size:13px;color:#64748b;margin-bottom:8px}
+.ts{font-size:12px;color:#94a3b8;margin-bottom:32px;font-family:monospace}
+.module{margin-bottom:32px}
+.module-header{display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:10px;margin-bottom:14px}
+.m1{background:#1e3a8a;color:#fff}.m2{background:#4c1d95;color:#fff}
+.m3{background:#14532d;color:#fff}.m4{background:#0c4a6e;color:#fff}
+.m5{background:#78350f;color:#fff}.m6{background:#881337;color:#fff}
+.mh-title{font-size:15px;font-weight:700}
+.mh-sub{font-size:11px;opacity:0.75;margin-top:2px}
+.algo{background:#fff;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.algo-header{padding:14px 18px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between}
+.algo-name{font-size:14px;font-weight:700;color:#0f172a}
+.algo-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;font-family:monospace}
+.b1{background:#dbeafe;color:#1e40af}.b2{background:#ede9fe;color:#5b21b6}
+.b3{background:#dcfce7;color:#15803d}.b4{background:#cffafe;color:#0e7490}
+.b5{background:#fef3c7;color:#b45309}.b6{background:#ffe4e6;color:#be123c}
+.algo-body{padding:16px 18px}
+.city-scene{background:#0f172a;border-radius:8px;padding:14px 16px;margin-bottom:12px;font-family:'Courier New',monospace;font-size:12px;line-height:2}
+.city-scene .loc{color:#60a5fa;font-weight:700}
+.city-scene .time{color:#94a3b8}
+.city-scene .event{color:#e2e8f0}
+.city-scene .found{color:#4ade80;font-weight:700}
+.city-scene .warn{color:#fbbf24;font-weight:700}
+.city-scene .crit{color:#f87171;font-weight:700}
+.city-scene .info{color:#a78bfa}
+.city-scene .sep{color:#334155;display:block;margin:4px 0}
+.result-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.res-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;text-align:center;min-width:100px}
+.res-val{font-size:18px;font-weight:800;color:#1d4ed8}
+.res-lbl{font-size:10px;color:#94a3b8;margin-top:2px}
+.res-green .res-val{color:#15803d}
+.res-red .res-val{color:#dc2626}
+.res-amber .res-val{color:#b45309}
+@media print{body{padding:16px}.algo{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<h1>🏙️ SmartCityX — Real-Time Algorithm Output Report</h1>
+<div class="subtitle">Team T-04 &nbsp;|&nbsp; Integrated Smart-City Analytics Platform &nbsp;|&nbsp; All 6 Modules (CO1–CO6) &nbsp;|&nbsp; Java DSA Engine</div>
+<div class="ts">⏰ Report Generated: 2026-10-23 18:47:32 &nbsp;|&nbsp; City: SmartCityX Metropolitan Area &nbsp;|&nbsp; Status: ACTIVE MONITORING</div>
+
+<!-- ═══ MODULE 1 ═══ -->
+<div class="module">
+  <div class="module-header m1">
+    <div>
+      <div class="mh-title">📡 MODULE 1 — String Algorithms (CO1)</div>
+      <div class="mh-sub">Dashboard: Smart Search + Emergency Detection + Citizen Reports</div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">1. KMP — Citizen Report Keyword Search</div>
+      <span class="algo-badge b1">KMP · O(N+M)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:42:05</span> <span class="event">SMART SEARCH ENGINE — Query received from Admin Portal</span><br/>
+        <span class="info">► Search Query: "water leakage"</span><br/>
+        <span class="info">► Algorithm: KMP | Scanning 30 citizen reports + 15 city documents...</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ MATCH — CR-1042</span> <span class="event">| Arjun Mehta | </span><span class="loc">Sector 12, Zone A</span><br/>
+        <span class="event">&nbsp;&nbsp;"Water leakage near Sector 12 pipeline. Water flooding the street."</span><br/>
+        <span class="info">&nbsp;&nbsp;Pattern found at position [0] in report text</span><br/>
+        <span class="found">✓ MATCH — CR-1057</span> <span class="event">| Pooja Menon | </span><span class="loc">Sector 9, Zone C</span><br/>
+        <span class="event">&nbsp;&nbsp;"Water contamination from discolored water from taps in Sector 9."</span><br/>
+        <span class="info">&nbsp;&nbsp;Pattern found at position [0] in report text</span><br/>
+        <span class="found">✓ MATCH — INF-2032</span> <span class="event">| Water Authority | </span><span class="loc">Zone A Blueprint</span><br/>
+        <span class="info">&nbsp;&nbsp;Pattern found at position [8] in document content</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">3 results found</span> <span class="event">| Comparisons: 2,847 | KMP never backtracked | Time: 0.003 ms</span>
+      </div>
+      <div class="result-row">
+        <div class="res-card res-green"><div class="res-val">3</div><div class="res-lbl">Results Found</div></div>
+        <div class="res-card"><div class="res-val">2,847</div><div class="res-lbl">Comparisons</div></div>
+        <div class="res-card"><div class="res-val">0.003 ms</div><div class="res-lbl">Exec Time</div></div>
+        <div class="res-card"><div class="res-val">O(N+M)</div><div class="res-lbl">Complexity</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">2. Z-Function — Repeated Incident Pattern Detection</div>
+      <span class="algo-badge b1">Z-Function · O(N+M)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:43:11</span> <span class="event">CITY REPORT ANALYSIS — Scanning for repeated incidents</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="loc">Sector 7, Zone C Water Pipeline Report:</span><br/>
+        <span class="event">"pipe burst pipe burst water leak pipe burst detected"</span><br/>
+        <span class="warn">⚠ Pattern "pipe burst" detected 3 times at positions [0, 11, 33]</span><br/>
+        <span class="info">&nbsp;&nbsp;→ Same pipe bursting repeatedly — structural issue flagged</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="loc">City Emergency Feed — Last 2 hours:</span><br/>
+        <span class="crit">🔴 "fire alert" repeated 3 times</span> <span class="event">— Metro Station, Central Market, Zone B</span><br/>
+        <span class="warn">⚠ "flood warning" repeated 1 time</span> <span class="event">— Zone D residential area</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">3. Rabin-Karp — Infrastructure Code Lookup</div>
+      <span class="algo-badge b1">Rabin-Karp · O(N+M) avg</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:44:22</span> <span class="event">INFRASTRUCTURE DATABASE SEARCH — Code lookup initiated</span><br/>
+        <span class="info">► Searching for: "SVC-ROAD-001" in maintenance log</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ SVC-ROAD-001</span> <span class="event">found at position [0]  → </span><span class="loc">Main Road, Zone B — Pothole repair job</span><br/>
+        <span class="found">✓ SVC-ROAD-001</span> <span class="event">found at position [27] → </span><span class="loc">Sector 5, Zone A — Road resurfacing</span><br/>
+        <span class="found">✓ SVC-ROAD-001</span> <span class="event">found at position [54] → </span><span class="loc">Highway 7, Zone D — Junction repair</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Searching IoT stream for SENSOR-42:</span><br/>
+        <span class="found">✓ SENSOR-42 (Water Pressure — Zone D Pump Station)</span><br/>
+        <span class="event">&nbsp;&nbsp;Status updates found at timestamps [0, 34, 52]</span><br/>
+        <span class="warn">⚠ Last status: OFFLINE — 8 minutes ago</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">4. Aho-Corasick — Real-Time Emergency Keyword Detection</div>
+      <span class="algo-badge b1">Aho-Corasick · O(N+M+Z)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:45:03</span> <span class="event">EMERGENCY SCANNER — Citizen report submitted via portal</span><br/>
+        <span class="info">► Citizen: Ravi Shankar | Location: Metro Station Basement, Zone A</span><br/>
+        <span class="info">► Report Text:</span><br/>
+        <span class="event">&nbsp;&nbsp;"There is a fire near the metro station basement. Several people are</span><br/>
+        <span class="event">&nbsp;&nbsp; injured and trapped. Gas leak smell detected. Ambulance required."</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Aho-Corasick scanning 16 emergency keywords simultaneously...</span><br/>
+        <span class="crit">🔴 FIRE      detected at position 13  → Metro Station Basement, Zone A</span><br/>
+        <span class="crit">🔴 INJURED   detected at position 55  → Multiple casualties reported</span><br/>
+        <span class="crit">🔴 TRAPPED   detected at position 73  → People trapped in basement</span><br/>
+        <span class="crit">🔴 GAS LEAK  detected at position 86  → Hazardous material risk</span><br/>
+        <span class="crit">🔴 AMBULANCE detected at position 109 → Medical assistance needed</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="crit">⚡ EMERGENCY LEVEL: CRITICAL (5 keywords detected)</span><br/>
+        <span class="warn">► AUTO-DISPATCH: Fire Team 1 + Ambulance 4 + HazMat Unit → Metro Station</span><br/>
+        <span class="info">► States visited: 187 | Single scan detected all keywords | Time: 0.002 ms</span>
+      </div>
+      <div class="result-row">
+        <div class="res-card res-red"><div class="res-val">5</div><div class="res-lbl">Keywords Found</div></div>
+        <div class="res-card res-red"><div class="res-val">CRITICAL</div><div class="res-lbl">Emergency Level</div></div>
+        <div class="res-card"><div class="res-val">1 scan</div><div class="res-lbl">All keywords at once</div></div>
+        <div class="res-card"><div class="res-val">0.002 ms</div><div class="res-lbl">Exec Time</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODULE 2 ═══ -->
+<div class="module">
+  <div class="module-header m2">
+    <div>
+      <div class="mh-title">📄 MODULE 2 — Suffix Structures (CO2)</div>
+      <div class="mh-sub">Dashboard: Documents Page — Similarity Analysis between city infrastructure documents</div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">5. Suffix Array — City Document Indexing</div>
+      <span class="algo-badge b2">Suffix Array · O(N log N)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:46:10</span> <span class="event">DOCUMENT INDEX ENGINE — Building suffix array for city documents</span><br/>
+        <span class="info">► Document: INF-2032 — Water Pipeline Network Zone A Blueprint</span><br/>
+        <span class="info">► Content: "water pipeline network zone A blueprint water supply..."</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Suffix Array built in O(N log N). 61 suffixes indexed.</span><br/>
+        <span class="info">► Substring queries via binary search O(M log N):</span><br/>
+        <span class="found">✓ "water pipeline"</span> <span class="event">→ Found at positions [0, 32] in INF-2032</span><br/>
+        <span class="found">✓ "zone A"         </span> <span class="event">→ Found at positions [27, 51] in INF-2032</span><br/>
+        <span class="found">✓ "water supply"   </span> <span class="event">→ Found at position [56] in INF-2032</span><br/>
+        <span class="warn">  "gas pipeline"   </span> <span class="event">→ Not found in INF-2032 (different document type)</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">INF-2031 Road Doc: "road" appears at [0, 12, 29, 42] — 4 sections</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">7. LCP / Kasai — Document Similarity Between City Reports</div>
+      <span class="algo-badge b2">LCP/Kasai · O(N log N) + O(N)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:46:55</span> <span class="event">DOCUMENT SIMILARITY ENGINE — Comparing infrastructure documents</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="loc">Document A: INF-2031 — Road Maintenance Sector 12 Annual Plan</span><br/>
+        <span class="event">&nbsp;&nbsp;"road maintenance sector 12 annual plan pothole repair road resurfacing..."</span><br/>
+        <span class="loc">Document B: INF-2034 — Road Maintenance Sector 14 Overpass Report</span><br/>
+        <span class="event">&nbsp;&nbsp;"road maintenance sector 14 overpass structural inspection bridge..."</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Step 1: Concatenate both documents (combined length: 180 chars)</span><br/>
+        <span class="info">► Step 2: Suffix Array built O(N log N)</span><br/>
+        <span class="info">► Step 3: LCP array via Kasai's O(N)</span><br/>
+        <span class="info">► Step 4: Scan cross-document adjacent suffix pairs</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ Longest Common Substring: "road maintenance sector "</span><br/>
+        <span class="found">✓ LCS Length: 24 characters</span><br/>
+        <span class="found">✓ Similarity Score: 47%</span> <span class="event">— RELATED DOCUMENTS</span><br/>
+        <span class="info">→ Both docs cover road maintenance — city can adapt Sector 12 plan for Sector 14</span><br/>
+        <span class="info">→ Saves time: no need to create new document from scratch</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="loc">Document A: INF-2031 (Road) vs INF-2033 (Energy Grid)</span><br/>
+        <span class="warn">Similarity: 8% — UNRELATED → Different city services, no content overlap</span>
+      </div>
+      <div class="result-row">
+        <div class="res-card res-green"><div class="res-val">47%</div><div class="res-lbl">Similarity Score</div></div>
+        <div class="res-card"><div class="res-val">"road maintenance sector "</div><div class="res-lbl">Longest Common Substring</div></div>
+        <div class="res-card"><div class="res-val">O(N)</div><div class="res-lbl">Kasai LCP</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODULE 3 ═══ -->
+<div class="module">
+  <div class="module-header m3">
+    <div>
+      <div class="mh-title">⚡ MODULE 3 — Advanced Dynamic Programming (CO3)</div>
+      <div class="mh-sub">Dashboard: Smart Search (autocorrect) + Resource Allocation + Analytics Pipeline</div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">9. Damerau-Levenshtein — Citizen Query Autocorrection</div>
+      <span class="algo-badge b3">Damerau-Lev · O(N×M)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:47:01</span> <span class="event">SMART SEARCH — Citizen query received</span><br/>
+        <span class="info">► Citizen portal query: "watter leakege near sector 12"</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Damerau-Levenshtein correction running...</span><br/>
+        <span class="found">watter  → water    </span><span class="event">(edit distance 1 — one extra 't' deleted)</span><br/>
+        <span class="found">leakege → leakage  </span><span class="event">(edit distance 1 — missing 'a' inserted)</span><br/>
+        <span class="event">sector  → sector   </span><span class="event">(no change)</span><br/>
+        <span class="event">12      → 12       </span><span class="event">(no change)</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ Corrected query: "water leakage near sector 12"</span><br/>
+        <span class="info">► Total edit distance: 2 | Auto-searching with corrected query...</span><br/>
+        <span class="found">✓ Found: CR-1042 — Water leakage near Sector 12 pipeline, Zone A</span><br/>
+        <span class="info">Transposition example: "serivce"→"service" Lev=2, Damerau=1 (swap ri↔ir)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">10. Bitmask DP — Emergency Resource Deployment Optimization</div>
+      <span class="algo-badge b3">Bitmask DP · O(2^N × N)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:47:18</span> <span class="event">RESOURCE ALLOCATION ENGINE — Emergency deployment request</span><br/>
+        <span class="info">► Incident: Multiple emergencies across Zone A and Zone B</span><br/>
+        <span class="info">► Available budget: ₹80,000 | Available resources: 8</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Evaluating all 2^8 = 256 resource combinations...</span><br/>
+        <span class="event">mask=00000001 → {Ambulance}          ₹20,000 · value=95</span><br/>
+        <span class="event">mask=00000011 → {Amb+FireTruck}      ₹45,000 · value=185</span><br/>
+        <span class="event">mask=10001101 → {Amb+Police+Rescue+Electric} ₹64,000 · value=322 ✓ BEST</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ OPTIMAL DEPLOYMENT PLAN:</span><br/>
+        <span class="found">  🚑 Ambulance    → City Hospital Road, Zone B      ₹20,000</span><br/>
+        <span class="found">  🚓 Police        → Metro Station, Zone A           ₹12,000</span><br/>
+        <span class="found">  🦺 Rescue Team   → Zone D Low-lying Area           ₹18,000</span><br/>
+        <span class="found">  ⚡ Electric Unit → Zone B Substation             ₹14,000</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">Total Deployed: ₹64,000 | Coverage Score: 63% | 256 combinations evaluated</span>
+      </div>
+      <div class="result-row">
+        <div class="res-card res-green"><div class="res-val">4</div><div class="res-lbl">Resources Deployed</div></div>
+        <div class="res-card res-amber"><div class="res-val">₹64,000</div><div class="res-lbl">Total Cost</div></div>
+        <div class="res-card res-green"><div class="res-val">63%</div><div class="res-lbl">Coverage Score</div></div>
+        <div class="res-card"><div class="res-val">256</div><div class="res-lbl">Subsets Checked</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODULE 4 ═══ -->
+<div class="module">
+  <div class="module-header m4">
+    <div>
+      <div class="mh-title">🌊 MODULE 4 — Network Flow (CO4)</div>
+      <div class="mh-sub">Dashboard: Network Flow Page — Water/Energy/Traffic/Emergency capacity analysis</div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">13. Ford-Fulkerson — City Water Distribution Analysis</div>
+      <span class="algo-badge b4">Ford-Fulkerson · O(V·E²)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:47:35</span> <span class="event">WATER NETWORK ANALYSIS — Zone C supply capacity check</span><br/>
+        <span class="info">► Network: Central Reservoir → Pump Stations → City Zones</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="event">Central Reservoir → Pump Station A (Zone A):  15 KL/hr capacity</span><br/>
+        <span class="event">Central Reservoir → Pump Station B (Zone B):  12 KL/hr capacity</span><br/>
+        <span class="event">Pump A → Zone A residential:                  10 KL/hr</span><br/>
+        <span class="event">Pump A → Zone B residential:                   8 KL/hr</span><br/>
+        <span class="event">Pump B → Zone B residential:                   7 KL/hr</span><br/>
+        <span class="event">Pump B → Zone C residential:                  10 KL/hr</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Ford-Fulkerson running BFS augmenting paths...</span><br/>
+        <span class="found">✓ Maximum water deliverable to Zone C: 19 KL/hr</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Min-Cut Analysis (Critical Infrastructure Bottlenecks):</span><br/>
+        <span class="crit">⚠ CRITICAL: Pump B → Zone C pipeline (cap=10 KL/hr)</span><br/>
+        <span class="event">&nbsp;&nbsp;Location: Pipeline junction near Sector 15, Zone C</span><br/>
+        <span class="crit">⚠ CRITICAL: Zone A → Zone C secondary pipe (cap=5 KL/hr)</span><br/>
+        <span class="event">&nbsp;&nbsp;Location: Underground pipe near Central Reservoir Road</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="warn">⚠ If either critical pipe fails → Zone C loses ALL water supply</span><br/>
+        <span class="info">► RECOMMENDATION: Schedule immediate inspection of Pump B → Zone C pipeline</span>
+      </div>
+      <div class="result-row">
+        <div class="res-card res-green"><div class="res-val">19 KL/hr</div><div class="res-lbl">Max Flow to Zone C</div></div>
+        <div class="res-card res-red"><div class="res-val">2</div><div class="res-lbl">Critical Bottlenecks</div></div>
+        <div class="res-card"><div class="res-val">O(V·E²)</div><div class="res-lbl">Time Complexity</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">15. Bipartite Matching — Emergency Resource Assignment</div>
+      <span class="algo-badge b4">Bipartite Match · O(E√V)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:47:52</span> <span class="event">EMERGENCY DISPATCH — Matching resources to incidents</span><br/>
+        <span class="info">► Active incidents requiring immediate response:</span><br/>
+        <span class="crit">  Medical emergency — City Hospital Road, Zone B</span><br/>
+        <span class="crit">  Fire reported     — Metro Station Basement, Zone A</span><br/>
+        <span class="crit">  Flash flooding    — Zone D Sector 22 residential</span><br/>
+        <span class="crit">  Medical trauma    — Highway 7 accident, Zone D</span><br/>
+        <span class="crit">  Industrial fire   — Zone B Industrial Area</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Bipartite matching algorithm running...</span><br/>
+        <span class="found">✓ Ambulance-1   → Medical — City Hospital Road, Zone B</span><br/>
+        <span class="found">✓ Ambulance-2   → Medical trauma — Highway 7, Zone D</span><br/>
+        <span class="found">✓ Fire Team-1   → Fire — Metro Station Basement, Zone A</span><br/>
+        <span class="found">✓ Fire Team-2   → Industrial fire — Zone B Industrial</span><br/>
+        <span class="found">✓ Rescue Team-2 → Flash flooding — Zone D Sector 22</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ All 5 incidents covered — optimal assignment achieved</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODULE 5 ═══ -->
+<div class="module">
+  <div class="module-header m5">
+    <div>
+      <div class="mh-title">🔒 MODULE 5 — NP-Completeness &amp; Approximation (CO5)</div>
+      <div class="mh-sub">Dashboard: NP-Completeness Page — City planning constraints + Critical infrastructure</div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">16. SAT / 3-SAT — City Service Constraint Feasibility Check</div>
+      <span class="algo-badge b5">DPLL SAT · O(2^N)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:48:10</span> <span class="event">CITY PLANNING ENGINE — Constraint feasibility analysis</span><br/>
+        <span class="info">► Scenario: Emergency operations plan for tonight's operations</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Service Constraints:</span><br/>
+        <span class="event">C1: Main Road OR Water Main OR Emergency Route must be active</span><br/>
+        <span class="event">C2: NOT Main Road OR Power Grid OR Traffic Signal active</span><br/>
+        <span class="event">C3: Water Main OR NOT Power Grid OR Emergency Route active</span><br/>
+        <span class="event">C4: NOT Water Main OR NOT Emerg Route OR Power Grid active</span><br/>
+        <span class="event">C5: Main Road OR NOT Traffic Signal OR Water Main active</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► DPLL solver running... checking assignments...</span><br/>
+        <span class="found">✓ SATISFIABLE — Emergency operations plan is FEASIBLE</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">Recommended operational configuration for tonight:</span><br/>
+        <span class="found">  ✓ Main Road (MG Road, Zone A)     — OPEN</span><br/>
+        <span class="found">  ✓ Water Main (Sector 12 pipeline) — OPERATIONAL</span><br/>
+        <span class="event">  ✗ Emergency Route (Zone B bypass)  — CLOSED for maintenance</span><br/>
+        <span class="found">  ✓ Power Grid (Zone A substation)  — ACTIVE</span><br/>
+        <span class="event">  ✗ Traffic Signal (Junction 4)      — OFFLINE (scheduled)</span><br/>
+        <span class="info">► All 5 constraints satisfied with this configuration</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">18. Vertex Cover — Critical Infrastructure Monitoring</div>
+      <span class="algo-badge b5">2-Approx · O(V+E)</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:48:28</span> <span class="event">INFRASTRUCTURE MONITOR — Identifying critical nodes</span><br/>
+        <span class="info">► City network: 8 infrastructure points, 10 connections</span><br/>
+        <span class="info">► Question: Which minimum nodes, if monitored, cover all connections?</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="event">Infrastructure map:</span><br/>
+        <span class="event">CentralHub ↔ PumpStation ↔ Substation ↔ Junction4</span><br/>
+        <span class="event">Junction4  ↔ TrafficNode ↔ WaterTower ↔ FireStation ↔ Hospital</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► 2-Approximation Vertex Cover running...</span><br/>
+        <span class="found">✓ CRITICAL NODES IDENTIFIED (monitor these 4 points):</span><br/>
+        <span class="found">  📍 Pump Station    — Zone A, Sector 5 (covers Hub+Sub connections)</span><br/>
+        <span class="found">  📍 Junction 4      — Zone B, Highway intersection (covers 3 roads)</span><br/>
+        <span class="found">  📍 Water Tower     — Zone C, Sector 9 (covers pipeline network)</span><br/>
+        <span class="found">  📍 Fire Station    — Zone A, Sector 7 (covers emergency routes)</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ All 10 infrastructure connections covered by these 4 nodes</span><br/>
+        <span class="info">→ Maintenance budget only needs to prioritize 4 out of 8 points</span><br/>
+        <span class="info">→ Approximation guarantee: result ≤ 2 × optimal minimum</span>
+      </div>
+      <div class="result-row">
+        <div class="res-card res-green"><div class="res-val">4 nodes</div><div class="res-lbl">Critical Points</div></div>
+        <div class="res-card res-green"><div class="res-val">10/10</div><div class="res-lbl">Connections Covered</div></div>
+        <div class="res-card"><div class="res-val">2×</div><div class="res-lbl">Approx Ratio</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODULE 6 ═══ -->
+<div class="module">
+  <div class="module-header m6">
+    <div>
+      <div class="mh-title">📡 MODULE 6 — Randomized &amp; Parallel Algorithms (CO6)</div>
+      <div class="mh-sub">Dashboard: Randomized &amp; Parallel Page — IoT stream processing + city-wide analytics</div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">19. Randomized QuickSort — Service Request Priority Queue</div>
+      <span class="algo-badge b6">Rand QuickSort · O(N log N) expected</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:48:45</span> <span class="event">SERVICE DISPATCH — Sorting 15 pending requests by urgency</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="info">► Incoming priority scores: [45, 92, 13, 78, 56, 31, 88, 24, 67, 99, 42, 15, 73, 60, 37]</span><br/>
+        <span class="info">► Randomized QuickSort running (random pivot selected)...</span><br/>
+        <span class="found">✓ Sorted: [13, 15, 24, 31, 37, 42, 45, 56, 60, 67, 73, 78, 88, 92, 99]</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="crit">🔴 Priority 99 — CR-1063: Flash flood Zone D Sector 22 → DISPATCH FIRST</span><br/>
+        <span class="crit">🔴 Priority 92 — CR-1046: Fire at Metro Station basement → DISPATCH SECOND</span><br/>
+        <span class="warn">⚠ Priority 88 — CR-1070: Chemical smell Zone B industrial → DISPATCH THIRD</span><br/>
+        <span class="info">► Remaining 12 requests queued in priority order for dispatch</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">20. Reservoir Sampling — IoT Sensor Stream Analysis</div>
+      <span class="algo-badge b6">Reservoir · O(N) time O(K) space</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:48:58</span> <span class="event">IoT STREAM SAMPLER — Continuous sensor feed analysis</span><br/>
+        <span class="info">► Stream: 500 temperature readings from SNS-001 (Zone A, Sector 12)</span><br/>
+        <span class="info">► Sampling 10 readings uniformly from stream...</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="found">✓ Sample collected (each reading had 2% selection probability):</span><br/>
+        <span class="event">  Reading 1:  34.2°C — 08:12 — Normal</span><br/>
+        <span class="event">  Reading 2:  36.8°C — 10:45 — Normal</span><br/>
+        <span class="warn">  Reading 3:  41.3°C — 13:22 — Warning threshold</span><br/>
+        <span class="event">  Reading 4:  38.1°C — 15:10 — Normal</span><br/>
+        <span class="crit">  Reading 5:  48.5°C — 18:40 — CRITICAL — Fire risk detected</span><br/>
+        <span class="event">  ... (5 more readings) ...</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="crit">⚠ Sample shows temperature spike at 18:40 in Zone A Sector 12</span><br/>
+        <span class="info">► Cross-reference with EMG-001 (Metro Station fire) — CORRELATED</span><br/>
+        <span class="info">► No need to store all 500 readings — O(K=10) space only</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo">
+    <div class="algo-header">
+      <div class="algo-name">23. Blelloch Scan — Real-Time City Energy Grid Monitoring</div>
+      <span class="algo-badge b6">Blelloch · O(log N) parallel</span>
+    </div>
+    <div class="algo-body">
+      <div class="city-scene">
+        <span class="time">18:49:12</span> <span class="event">ENERGY GRID MONITOR — Real-time cumulative load analysis</span><br/>
+        <span class="info">► Computing cumulative energy load across all 8 city zones</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="event">Zone A (City Center):      120 MW  | Cumulative:  120 MW  ✓ NORMAL</span><br/>
+        <span class="event">Zone B (Industrial):        85 MW  | Cumulative:  205 MW  ✓ NORMAL</span><br/>
+        <span class="event">Zone C (Residential North): 200 MW  | Cumulative:  405 MW  ✓ NORMAL</span><br/>
+        <span class="event">Zone D (Low-lying Area):     95 MW  | Cumulative:  500 MW  ✓ NORMAL</span><br/>
+        <span class="event">Zone E (Metro Corridor):    140 MW  | Cumulative:  640 MW  ✓ NORMAL</span><br/>
+        <span class="warn">Zone F (Hospital District): 175 MW  | Cumulative:  815 MW  ⚠ HIGH LOAD</span><br/>
+        <span class="warn">Zone G (University Area):    60 MW  | Cumulative:  875 MW  ⚠ HIGH LOAD</span><br/>
+        <span class="crit">Zone H (Airport Sector):   110 MW  | Cumulative:  985 MW  🔴 NEAR CAPACITY</span><br/>
+        <span class="sep">────────────────────────────────────────────────────</span>
+        <span class="crit">⚠ GRID ALERT: Total load 985 MW = 98.5% of 1000 MW capacity</span><br/>
+        <span class="warn">► RECOMMENDATION: Reduce load in Zone F (Hospital) and Zone H (Airport)</span><br/>
+        <span class="info">► Blelloch scan computed in O(log 8) = 3 parallel steps vs O(8) sequential</span>
+      </div>
+      <div class="result-row">
+        <div class="res-card res-red"><div class="res-val">985 MW</div><div class="res-lbl">Total Grid Load</div></div>
+        <div class="res-card res-red"><div class="res-val">98.5%</div><div class="res-lbl">Capacity Used</div></div>
+        <div class="res-card res-amber"><div class="res-val">Zone H</div><div class="res-lbl">Critical Zone</div></div>
+        <div class="res-card"><div class="res-val">O(log N)</div><div class="res-lbl">Parallel Steps</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:32px;padding:16px 20px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;text-align:center;font-size:12px;color:#64748b">
+  SmartCityX &nbsp;|&nbsp; Team T-04 &nbsp;|&nbsp; Java DSA Engine + React Dashboard &nbsp;|&nbsp; 23 Algorithms across CO1–CO6<br/>
+  All outputs are generated by Java algorithms running against real city simulation data
+</div>
+
+</body>
+</html>
