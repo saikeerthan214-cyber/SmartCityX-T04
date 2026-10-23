@@ -157,8 +157,8 @@ Double-click `run.bat` and choose mode.
 
 | File | How to open | Purpose |
 |------|-------------|---------|
-| `SmartCityX_Presentation.html` | Chrome browser | Project presentation (14 slides) |
-| `SmartCityX_OutputReport.html` | Chrome browser | All 23 algorithm outputs |
+| [📊 Presentation (14 slides)](https://saikeerthan214-cyber.github.io/SmartCityX-T04/SmartCityX_Presentation.html) | Click link | Project presentation |
+| [📄 Output Report](https://saikeerthan214-cyber.github.io/SmartCityX-T04/SmartCityX_OutputReport.html) | Click link | All 23 algorithm outputs |
 | `Demo.java` | `java -cp out Demo` | Interactive algorithm demo |
 | `http://localhost:5173` | Chrome (after npm run dev) | Full dashboard |
 
